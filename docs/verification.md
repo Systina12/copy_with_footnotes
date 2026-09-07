@@ -2,7 +2,7 @@
 
 Verified locally: `npm ci` completed with zero reported vulnerabilities;
 `npm run typecheck` passed; `npm test` passed 103/103 tests; `npm run build`
-produced a 3,668-byte `main.js`. Each official worker passed all 36 cases and
+produced a 3,663-byte `main.js`. Each official worker passed all 36 cases and
 matched its stored fixture data. Core source totals 158 lines; source,
 tests, verifier, and build script total approximately 560 lines, excluding
 JSON fixtures, documentation, dependencies, and generated output.
@@ -126,24 +126,28 @@ No separate lint tool is configured.
   The public published-plugin registry was checked on 2026-09-07: none of its
   7,367 entries matched the ID, name, or `Systina12/copy_with_footnotes` repository.
   This is not a reservation; Community Directory determines final availability.
-- `manifest.json`, `package.json`, and `versions.json` agree on `0.1.0`.
-  The release tag must be exactly `0.1.0`, without a `v` prefix.
+- `manifest.json`, `package.json`, and `package-lock.json` agree on `0.1.1`.
+  The release tag must be exactly `0.1.1`, without a `v` prefix.
+  `versions.json` retains `0.1.0` and adds `0.1.1`, both requiring Obsidian `1.8.7`.
 - The manifest/package description is "Copy selected Markdown together with
   its referenced footnote definitions." It is 73 characters, ends with a period, and is below
   the 250-character limit.
-- `minAppVersion` and `versions.json["0.1.0"]` remain `1.8.7`, the first version
+- `minAppVersion` and `versions.json["0.1.1"]` remain `1.8.7`, the first version
   exposing footnote references and a version verified with the official worker.
 - `isDesktopOnly` remains false: no runtime Node or Electron dependency is used.
 - `manifest.json.author` is `Systina12`, with `authorUrl` set to
   `https://github.com/Systina12`, as supplied by the owner. No funding URL is set.
 - Command ID remains `copy`; Obsidian adds the plugin prefix itself.
+- Version `0.1.1` changes the palette command name to `Copy selection` to follow
+  Obsidian's command naming guideline. The editor menu remains `Copy with footnotes`;
+  both entry points still use the same `copySelection()` implementation.
 
 ## Release Checklist
 
 - Author metadata has been supplied by the owner and filled in `manifest.json`.
 - The repository's existing MIT license names Systina12 and was preserved.
 - In Desktop Source mode and Live Preview, select text and confirm both
-  Command Palette and right-click Copy with footnotes produce the same text.
+  palette command Copy selection and right-click Copy with footnotes produce the same text.
 - Check that empty selections have no added menu item, the native Copy item is
   unchanged, and a right-click in another split copies from that editor.
 - Check the system clipboard with multiline and recursive definitions, immediate
@@ -152,7 +156,7 @@ No separate lint tool is configured.
   applicable selection/clipboard checks on Android and iOS; verify a brief Notice
   on clipboard failure when the platform permits reproducing it. Real worker
   execution and API-boundary tests are not full-app or physical-device tests.
-- Create a GitHub release tagged `0.1.0` with `main.js` and `manifest.json`.
+- Create a GitHub release tagged `0.1.1` with `main.js` and `manifest.json`.
   `versions.json` belongs in the repository. No `styles.css` is needed.
 - Follow the current [official submission guide](https://docs.obsidian.md/plugins/releasing/submit-plugin):
   sign in at [community.obsidian.md](https://community.obsidian.md), link the
@@ -160,7 +164,7 @@ No separate lint tool is configured.
   reads `manifest.json` at the default branch HEAD, so the final metadata must
   be committed and pushed by the owner before submission. The matching GitHub
   release assets are also required.
-- The only command is Copy with footnotes, also available from the editor menu.
+- The only command is Copy selection; the editor menu item is Copy with footnotes.
   Ctrl+C, paste, collision resolution,
   renumbering, citations, wikilinks, embeds, attachments, and other requested
-  exclusions remain outside version 0.1.0.
+  exclusions remain outside version 0.1.1.

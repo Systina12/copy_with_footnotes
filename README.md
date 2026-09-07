@@ -20,7 +20,7 @@ Select:
 Interesting result.[^smith]
 ```
 
-After Copy with footnotes, on the clipboard:
+After copying, on the clipboard:
 
 ```md
 Interesting result.[^smith]
@@ -30,7 +30,7 @@ Interesting result.[^smith]
 
 ## Usage
 
-- Command Palette -> Copy with footnotes
+- Command Palette -> Copy selection
 - Right-click selected text -> Copy with footnotes
 
 Requires Obsidian 1.8.7 or later, in Source mode or Live Preview.

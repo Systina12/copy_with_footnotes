@@ -1,6 +1,6 @@
 {
   "name": "copy-with-footnotes",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Copy selected Markdown together with its referenced footnote definitions.",
   "main": "main.js",
   "type": "module",

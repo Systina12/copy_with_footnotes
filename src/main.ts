@@ -26,7 +26,7 @@ export default class CopyWithFootnotesPlugin extends Plugin {
     }));
     this.addCommand({
       id: "copy",
-      name: "Copy with footnotes",
+      name: "Copy selection",
       callback: () => {
         const view = this.app.workspace.getActiveViewOfType(MarkdownView);
         if (!view || view.getMode() !== "source") {

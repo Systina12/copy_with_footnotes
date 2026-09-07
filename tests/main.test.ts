@@ -87,7 +87,7 @@ describe("command integration", () => {
   beforeEach(() => { app = harness(); });
 
   it("registers exactly one command and cleanup-managed listeners", () => {
-    expect(app.commands.map(({ id, name }) => ({ id, name }))).toEqual([{ id: "copy", name: "Copy with footnotes" }]);
+    expect(app.commands.map(({ id, name }) => ({ id, name }))).toEqual([{ id: "copy", name: "Copy selection" }]);
     expect(app.registerEvent).toHaveBeenCalledTimes(4);
     expect(app.registerEvent.mock.calls.map(([ref]) => ref.event)).toContain("editor-menu");
   });
