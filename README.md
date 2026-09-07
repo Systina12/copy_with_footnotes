@@ -41,15 +41,6 @@ Run `npm ci`, `npm test`, and `npm run build`. Put `main.js` and
 `manifest.json` in `<vault>/.obsidian/plugins/copy-with-footnotes/`, then enable
 Copy with Footnotes in Community plugins. No CSS file is needed.
 
-## Limitations
 
-- Does not replace Ctrl+C.
-- Does not provide Paste with Footnotes.
-- Does not resolve destination footnote ID collisions.
-- Does not renumber footnotes.
-- Does not handle citations, wikilinks, embeds, or attachments.
-- Relies primarily on Obsidian's Markdown metadata.
-- Pending or visibly stale metadata can result in copying only the selection.
-- Mobile requires an available Clipboard API; physical devices have not been tested.
 
 API findings and release checks: [Verification](docs/verification.md).
