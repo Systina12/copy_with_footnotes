@@ -1,0 +1,1556 @@
+{
+  "version": "1.13.7",
+  "fixtures": [
+    {
+      "name": "basic",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 11
+            },
+            "end": {
+              "line": 2,
+              "col": 12,
+              "offset": 23
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            },
+            "end": {
+              "line": 0,
+              "col": 9,
+              "offset": 9
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "multiple",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 13
+            },
+            "end": {
+              "line": 2,
+              "col": 7,
+              "offset": 20
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 0,
+              "offset": 21
+            },
+            "end": {
+              "line": 3,
+              "col": 7,
+              "offset": 28
+            }
+          },
+          "id": "b"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 7,
+              "offset": 7
+            },
+            "end": {
+              "line": 0,
+              "col": 11,
+              "offset": 11
+            }
+          },
+          "id": "b"
+        }
+      ]
+    },
+    {
+      "name": "repeated reference",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 13
+            },
+            "end": {
+              "line": 2,
+              "col": 7,
+              "offset": 20
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 7,
+              "offset": 7
+            },
+            "end": {
+              "line": 0,
+              "col": 11,
+              "offset": 11
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "multiline",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 4,
+              "col": 9,
+              "offset": 39
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "multiline paragraphs",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 4,
+              "col": 10,
+              "offset": 30
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "tab continuation",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 3,
+              "col": 7,
+              "offset": 26
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "lazy continuation",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 3,
+              "col": 6,
+              "offset": 25
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "already included",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 10
+            },
+            "end": {
+              "line": 2,
+              "col": 12,
+              "offset": 22
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 4,
+              "offset": 4
+            },
+            "end": {
+              "line": 0,
+              "col": 8,
+              "offset": 8
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "missing",
+      "footnotes": [],
+      "footnoteRefs": []
+    },
+    {
+      "name": "recursive",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 2,
+              "col": 11,
+              "offset": 18
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 0,
+              "offset": 19
+            },
+            "end": {
+              "line": 3,
+              "col": 7,
+              "offset": 26
+            }
+          },
+          "id": "b"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 7,
+              "offset": 14
+            },
+            "end": {
+              "line": 2,
+              "col": 11,
+              "offset": 18
+            }
+          },
+          "id": "b"
+        }
+      ]
+    },
+    {
+      "name": "cycle",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 2,
+              "col": 11,
+              "offset": 18
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 0,
+              "offset": 19
+            },
+            "end": {
+              "line": 3,
+              "col": 11,
+              "offset": 30
+            }
+          },
+          "id": "b"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 7,
+              "offset": 14
+            },
+            "end": {
+              "line": 2,
+              "col": 11,
+              "offset": 18
+            }
+          },
+          "id": "b"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 7,
+              "offset": 26
+            },
+            "end": {
+              "line": 3,
+              "col": 11,
+              "offset": 30
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "self cycle",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 2,
+              "col": 11,
+              "offset": 18
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 7,
+              "offset": 14
+            },
+            "end": {
+              "line": 2,
+              "col": 11,
+              "offset": 18
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "ordering",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 16
+            },
+            "end": {
+              "line": 2,
+              "col": 7,
+              "offset": 23
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 0,
+              "offset": 24
+            },
+            "end": {
+              "line": 3,
+              "col": 7,
+              "offset": 31
+            }
+          },
+          "id": "b"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 0,
+              "offset": 0
+            },
+            "end": {
+              "line": 0,
+              "col": 4,
+              "offset": 4
+            }
+          },
+          "id": "b"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 10,
+              "offset": 10
+            },
+            "end": {
+              "line": 0,
+              "col": 14,
+              "offset": 14
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "preorder dependencies",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 13
+            },
+            "end": {
+              "line": 2,
+              "col": 7,
+              "offset": 20
+            }
+          },
+          "id": "c"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 0,
+              "offset": 21
+            },
+            "end": {
+              "line": 3,
+              "col": 7,
+              "offset": 28
+            }
+          },
+          "id": "b"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 4,
+              "col": 0,
+              "offset": 29
+            },
+            "end": {
+              "line": 4,
+              "col": 11,
+              "offset": 40
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 7,
+              "offset": 7
+            },
+            "end": {
+              "line": 0,
+              "col": 11,
+              "offset": 11
+            }
+          },
+          "id": "c"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 4,
+              "col": 7,
+              "offset": 36
+            },
+            "end": {
+              "line": 4,
+              "col": 11,
+              "offset": 40
+            }
+          },
+          "id": "b"
+        }
+      ]
+    },
+    {
+      "name": "code fence",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 6,
+              "col": 0,
+              "offset": 32
+            },
+            "end": {
+              "line": 6,
+              "col": 18,
+              "offset": 50
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 7,
+              "col": 0,
+              "offset": 51
+            },
+            "end": {
+              "line": 7,
+              "col": 18,
+              "offset": 69
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 4,
+              "col": 4,
+              "offset": 26
+            },
+            "end": {
+              "line": 4,
+              "col": 8,
+              "offset": 30
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "selected fence fragment",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 4,
+              "col": 0,
+              "offset": 22
+            },
+            "end": {
+              "line": 4,
+              "col": 10,
+              "offset": 32
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": []
+    },
+    {
+      "name": "inline footnote",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 6,
+              "offset": 6
+            },
+            "end": {
+              "line": 0,
+              "col": 21,
+              "offset": 21
+            }
+          },
+          "id": "[inline0"
+        }
+      ],
+      "footnoteRefs": []
+    },
+    {
+      "name": "inline code",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 21
+            },
+            "end": {
+              "line": 2,
+              "col": 7,
+              "offset": 28
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 0,
+              "offset": 29
+            },
+            "end": {
+              "line": 3,
+              "col": 7,
+              "offset": 36
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 15,
+              "offset": 15
+            },
+            "end": {
+              "line": 0,
+              "col": 19,
+              "offset": 19
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "fenced dependency",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 5,
+              "col": 7,
+              "offset": 49
+            }
+          },
+          "id": "x"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 6,
+              "col": 0,
+              "offset": 50
+            },
+            "end": {
+              "line": 6,
+              "col": 7,
+              "offset": 57
+            }
+          },
+          "id": "y"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "partial definition",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 3,
+              "col": 10,
+              "offset": 29
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "included recursive parent",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 2,
+              "col": 11,
+              "offset": 18
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 0,
+              "offset": 19
+            },
+            "end": {
+              "line": 3,
+              "col": 7,
+              "offset": 26
+            }
+          },
+          "id": "b"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 7,
+              "offset": 14
+            },
+            "end": {
+              "line": 2,
+              "col": 11,
+              "offset": 18
+            }
+          },
+          "id": "b"
+        }
+      ]
+    },
+    {
+      "name": "uppercase labels",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 9
+            },
+            "end": {
+              "line": 2,
+              "col": 13,
+              "offset": 22
+            }
+          },
+          "id": "abc"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 7,
+              "offset": 7
+            }
+          },
+          "id": "abc"
+        }
+      ]
+    },
+    {
+      "name": "blockquote definition",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 2,
+              "offset": 9
+            },
+            "end": {
+              "line": 3,
+              "col": 12,
+              "offset": 33
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "list definition",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 2,
+              "offset": 9
+            },
+            "end": {
+              "line": 3,
+              "col": 12,
+              "offset": 33
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "indented definition",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 3,
+              "col": 10,
+              "offset": 31
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "CRLF",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 9
+            },
+            "end": {
+              "line": 4,
+              "col": 9,
+              "offset": 43
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "x"
+        }
+      ]
+    },
+    {
+      "name": "one trailing newline",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 2,
+              "col": 12,
+              "offset": 19
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "existing blank line",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 2,
+              "col": 12,
+              "offset": 19
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "existing many blank lines",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 4,
+              "col": 0,
+              "offset": 9
+            },
+            "end": {
+              "line": 4,
+              "col": 12,
+              "offset": 21
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "whitespace blank line",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 13
+            },
+            "end": {
+              "line": 2,
+              "col": 12,
+              "offset": 25
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 3,
+              "offset": 3
+            },
+            "end": {
+              "line": 0,
+              "col": 7,
+              "offset": 7
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "no footnotes",
+      "footnotes": [],
+      "footnoteRefs": []
+    },
+    {
+      "name": "empty selection",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 2,
+              "col": 12,
+              "offset": 19
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "partial reference",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 2,
+              "col": 12,
+              "offset": 19
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "escaped reference",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 20
+            },
+            "end": {
+              "line": 2,
+              "col": 7,
+              "offset": 27
+            }
+          },
+          "id": "a"
+        },
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 0,
+              "offset": 28
+            },
+            "end": {
+              "line": 3,
+              "col": 7,
+              "offset": 35
+            }
+          },
+          "id": "x"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 14,
+              "offset": 14
+            },
+            "end": {
+              "line": 0,
+              "col": 18,
+              "offset": 18
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "unfinished whitespace blank line",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 3,
+              "col": 0,
+              "offset": 12
+            },
+            "end": {
+              "line": 3,
+              "col": 12,
+              "offset": 24
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        }
+      ]
+    },
+    {
+      "name": "missing recursive dependency",
+      "footnotes": [
+        {
+          "position": {
+            "start": {
+              "line": 2,
+              "col": 0,
+              "offset": 7
+            },
+            "end": {
+              "line": 2,
+              "col": 21,
+              "offset": 28
+            }
+          },
+          "id": "a"
+        }
+      ],
+      "footnoteRefs": [
+        {
+          "position": {
+            "start": {
+              "line": 0,
+              "col": 1,
+              "offset": 1
+            },
+            "end": {
+              "line": 0,
+              "col": 5,
+              "offset": 5
+            }
+          },
+          "id": "a"
+        }
+      ]
+    }
+  ]
+}

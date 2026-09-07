@@ -1,0 +1,26 @@
+{
+  "name": "copy-with-footnotes",
+  "version": "0.1.0",
+  "description": "Copy selected Markdown together with its referenced footnote definitions.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "typecheck": "tsc --noEmit --skipLibCheck",
+    "build": "npm run typecheck && node esbuild.config.mjs production",
+    "test": "vitest run",
+    "test:metadata": "node scripts/verify-metadata.mjs"
+  },
+  "keywords": [
+    "obsidian",
+    "obsidian-plugin"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.15.17",
+    "esbuild": "^0.25.5",
+    "obsidian": "1.13.1",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}
