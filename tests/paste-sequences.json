@@ -1,0 +1,10 @@
+[
+  {"name":"repeated exact reuse","source":"\n\n[^a]: Same","clipboard":"Hello[^a]\n\n[^a]: Same","body":"Hello[^a]","suffix":"\n\n[^a]: Same","ids":["a"],"firstAdded":0,"reused":1,"renamed":0},
+  {"name":"new definition reused on subsequent pastes","source":"","clipboard":"Hello[^a]\n\n[^a]: A","body":"Hello[^a]","suffix":"\n\n[^a]: A","ids":["a"],"firstAdded":1,"reused":1,"renamed":0},
+  {"name":"numeric rename reused on subsequent pastes","source":"\n\n[^1]: Old","clipboard":"Hello[^1]\n\n[^1]: New","body":"Hello[^2]","suffix":"\n\n[^1]: Old\n\n[^2]: New","ids":["1","2"],"firstAdded":1,"reused":1,"renamed":1},
+  {"name":"named rename reused on subsequent pastes","source":"\n\n[^a]: Old","clipboard":"Hello[^a]\n\n[^a]: New","body":"Hello[^a-2]","suffix":"\n\n[^a]: Old\n\n[^a-2]: New","ids":["a","a-2"],"firstAdded":1,"reused":1,"renamed":1},
+  {"name":"cyclic rename reused on subsequent pastes","source":"\n\n[^a]: See [^b].\n[^b]: Old","clipboard":"A[^a]\n\n[^a]: See [^b].\n[^b]: See [^a].","body":"A[^a-2]","suffix":"\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: See [^a-2].","ids":["a","b","a-2","b-2"],"firstAdded":2,"reused":2,"renamed":2},
+  {"name":"identical duplicate targets remain unchanged","source":"\n\n[^a]: Same\n[^a]: Same","clipboard":"A[^a]\n\n[^a]: Same","body":"A[^a]","suffix":"\n\n[^a]: Same\n[^a]: Same","ids":["a","a"],"firstAdded":0,"reused":1,"renamed":0},
+  {"name":"different duplicate targets reuse one new definition","source":"\n\n[^a]: Same\n[^a]: Other","clipboard":"A[^a]\n\n[^a]: Same","body":"A[^a-2]","suffix":"\n\n[^a]: Same\n[^a]: Other\n\n[^a-2]: Same","ids":["a","a","a-2"],"firstAdded":1,"reused":1,"renamed":1},
+  {"name":"CRLF clipboard in an LF editor","source":"\n\n[^1]: Old","clipboard":"A[^1]\r\nB\r\n\r\n[^1]: First\r\n    Second","body":"A[^2]\nB","suffix":"\n\n[^1]: Old\n\n[^2]: First\n    Second","ids":["1","2"],"firstAdded":1,"reused":1,"renamed":1}
+]

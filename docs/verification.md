@@ -1,170 +1,151 @@
 # Verification
 
-Verified locally: `npm ci` completed with zero reported vulnerabilities;
-`npm run typecheck` passed; `npm test` passed 103/103 tests; `npm run build`
-produced a 3,663-byte `main.js`. Each official worker passed all 36 cases and
-matched its stored fixture data. Core source totals 158 lines; source,
-tests, verifier, and build script total approximately 560 lines, excluding
-JSON fixtures, documentation, dependencies, and generated output.
+This document covers Copy with Footnotes 0.2.0, including optional experimental
+Paste. Versions 0.1.0 and 0.1.1 contain Copy only; their tags and release assets
+remain unchanged.
 
-## Public API
+## Results
 
-Checked the official `obsidian` 1.13.1 typings and the current
-[sample plugin](https://github.com/obsidianmd/obsidian-sample-plugin).
-`CachedMetadata.footnotes` was introduced in 1.6.6 and `footnoteRefs` in 1.8.7.
-Both cache items have `id` and `position: Pos`; `Loc.offset` is an absolute
-character offset. The plugin uses `Editor.getValue()`, `getCursor("from"/"to")`,
-`posToOffset()`, `Workspace.getActiveViewOfType(MarkdownView)`, `getMode()`,
-`MetadataCache.getFileCache()`, `Plugin.addCommand()`, `registerEvent()`, and `Notice`.
-The `editor-menu` event (since 1.1.0) provides `(Menu, Editor,
-MarkdownView | MarkdownFileInfo)`. It adds a selected-text-only menu item with
-`Menu.addItem()`, `MenuItem.setTitle()`, `setIcon("copy")`, and `onClick()`.
-The command and menu both call `copySelection(editor, info)`, including the same
-cache checks and clipboard handling. The menu uses the event's editor/file;
-opening a menu does not copy anything or alter the native Copy item.
+Latest validation ran on 2026-09-09 after fixing the four follow-up review findings.
 
-The [submission requirements](https://docs.obsidian.md/community-directory/submission-requirements-for-plugins)
-recommend `navigator.clipboard.writeText()` as a portable alternative to Electron.
-There are no runtime dependencies, Node/Electron imports, Markdown parsers,
-network requests, or CSS. Clipboard writing happens before the command's first
-`await`, preserving the user gesture as far as the host WebView allows.
+| Check | Result |
+| --- | --- |
+| `npm ci` and dependency audit | Clean install succeeded; zero known vulnerabilities. |
+| `npm test` | 527/527 tests in six files passed. |
+| `npm run build` | TypeScript check and production build passed. |
+| Production `main.js` | 119,890 bytes, including bundled dependency licenses. |
+| Official Obsidian 1.8.7 worker | 38 Copy, 114 Paste, 8 sequences / 40 consecutive pastes passed. |
+| Official Obsidian 1.13.7 worker | Same cases and sequences passed. |
+| Installed Obsidian 1.13.7 | 320 native scenario checks passed across Source and Live Preview. |
 
-## Actual Metadata Behavior
+Each native editor mode passed 114 Paste scenarios, eight five-paste sequences,
+and 38 Copy scenarios. The native harness invoked registered commands through
+Obsidian's official CLI and used the actual editor, clipboard, metadata,
+notices, and Undo/Redo. It verified cancellation or one-step restoration of
+text and selection, stable carets, and success feedback during repeated pastes.
+Fixture setup waited for indexing and rendering before placing and checking the
+caret/selection; repeated pastes did not add a wait between rounds. Clipboard
+readback was allowed up to 250 ms without re-running Copy.
+See the [review report](review-2026-09-09.md) for findings and evidence.
 
-Executed the unmodified `worker.js` from official public desktop releases
-**1.8.7** and **1.13.7** against the cases in `tests/cases.json`.
-The worker executes in a Node VM only during verification; it is not a runtime
-dependency and its code is not redistributed. The captured metadata fixtures
-are outputs for our own Markdown examples, not fabricated parser mocks.
-
-Both releases return the following offsets for:
-
-```md
-A[^x]
-
-[^x]: First
-    Second
-    Third
-```
-
-- Reference: `[1, 5)`.
-- Definition: `[7, 39)`, including both continuation lines.
-- Definition end is exclusive, before any terminal newline.
-- Paragraph breaks, tab indentation, lazy continuation, CRLF, and fenced code
-  within definitions are also covered by the native range.
-- Code-fence and inline-code references do not enter `footnoteRefs`.
-- Undefined references may be absent from `footnoteRefs`; normal copy is safe.
-- IDs are lowercased in metadata; original spelling is preserved in the output.
-- Inline footnotes appear in `footnotes` with synthetic IDs and content-only
-  ranges. A traditional `[^id]:` marker check excludes them.
-- A blockquote/list definition starts after the first-line container prefix.
-  The plugin includes that line's original prefix so continuation context is
-  retained without rewriting Markdown.
-
-No continuation fallback is necessary on either tested release. Future parser
-changes are not covered by these results; run the verifier against new releases.
-
-## Cache Freshness
-
-Expected: use the current editor text and never copy an obviously stale definition.
-
-Actual API: `getFileCache()` exposes neither the indexed source/version nor a
-public synchronous reparse function. The `changed(file, data, cache)` event does
-provide the corresponding source. The plugin keeps that association in a
-WeakMap, and observes `editor-change` and vault `modify` through registered events.
-
-Fallback: after an observed edit, metadata is used only with an exact matching
-source snapshot. Until indexing catches up, only the original selection is
-copied. Range bounds, reference spelling, definition markers, and definition
-line endings are additionally checked against the current buffer. Every output
-definition is sliced from that buffer. No note-writing API is called.
-
-Remaining risk: caches already present when the plugin is enabled have no
-historical source snapshot. They are accepted only after the local position
-checks; an unobserved edit before plugin activation that preserves all checked
-positions but changes syntax elsewhere cannot be conclusively detected. Once
-a `changed` event supplies a snapshot, full source equality is enforced. Exotic
-labels whose parser normalization differs from lowercasing degrade to normal
-copy. Definitions missing from metadata are not discovered by another parser.
-
-## Tests and Reproduction
+## Reproduce
 
 ```sh
 npm ci
-npm run typecheck
 npm test
 npm run build
+npm run test:metadata -- /path/to/worker-1.8.7.js 1.8.7
+npm run test:metadata -- /path/to/worker-1.13.7.js 1.13.7
 ```
 
-The regular tests are offline and use fixtures from both releases. They cover
-basic/multiple/repeated references, complete and partial definitions, missing
-and recursive dependencies, cycles, ordering, native code exclusions, inline
-footnotes, container prefixes, source preservation, newlines, stale caches,
-reversed offsets, and a 12,000-definition dependency chain. Focused command
-tests cover no editor, Reading View, empty selection, clipboard failures,
-event cleanup registration, and cache recovery. Context-menu tests cover item
-visibility, icon, the shared execution method, the event's editor/file, success,
-failure, selection changes before clicking, and stale-cache recovery. The
-original 95 tests are retained, with command-label and listener-count assertions
-updated for the new entry point.
+The workers must come from the corresponding official Obsidian release. They
+are not shipped with the plugin. Fixtures are native metadata for this
+project's own Markdown examples. The verifier checks resulting native
+reference/definition IDs in boundary cases. Every accepted structured Paste
+also checks the actual added-definition count and preserves the original
+definition content, including existing duplicates.
 
-To repeat actual parser verification, extract `worker.js` from the matching
-official `obsidian-<version>.asar.gz` release asset and run:
+Use `--write` after the version only to intentionally regenerate fixtures.
+Normal tests are offline and do not download or execute Obsidian binaries.
+TypeScript checks include production and test code. No separate lint tool is
+configured. Temporary verification files belong in the ignored `.verification/`
+directory.
 
-```sh
-npm run test:metadata -- /path/to/worker.js 1.8.7
-npm run test:metadata -- /path/to/worker.js 1.13.7
-```
+Release preparation upgraded the development test runner to Vitest 4.1.11,
+which fixes GHSA-82fw-gwwq-j7x9. Use a supported LTS Node.js release for the
+development tools. Vitest is not included in the plugin bundle.
 
-An optional `--write` regenerates fixtures. Normal `npm test` never downloads
-or invokes an Obsidian binary. TypeScript checks include production and test code.
-No separate lint tool is configured.
+For application checks, install the built `main.js` and `manifest.json` into a
+separate test vault. Enable experimental Paste and repeat the cases in
+`tests/paste-cases.json` and `tests/paste-sequences.json` in Source mode and Live
+Preview. Check notices, selection and caret restoration, Undo/Redo, settings
+toggling, and the shared command/menu behavior. Repeat Copy with
+`tests/cases.json`. Existing notes must be kept separate from test fixtures.
 
-## Metadata Audit
+## Public APIs and runtime
 
-- ID: `copy-with-footnotes`, lowercase and hyphenated, with no `obsidian` prefix.
-  The public published-plugin registry was checked on 2026-09-07: none of its
-  7,367 entries matched the ID, name, or `Systina12/copy_with_footnotes` repository.
-  This is not a reservation; Community Directory determines final availability.
-- `manifest.json`, `package.json`, and `package-lock.json` agree on `0.1.1`.
-  The release tag must be exactly `0.1.1`, without a `v` prefix.
-  `versions.json` retains `0.1.0` and adds `0.1.1`, both requiring Obsidian `1.8.7`.
-- The manifest/package description is "Copy selected Markdown together with
-  its referenced footnote definitions." It is 73 characters, ends with a period, and is below
-  the 250-character limit.
-- `minAppVersion` and `versions.json["0.1.1"]` remain `1.8.7`, the first version
-  exposing footnote references and a version verified with the official worker.
-- `isDesktopOnly` remains false: no runtime Node or Electron dependency is used.
-- `manifest.json.author` is `Systina12`, with `authorUrl` set to
-  `https://github.com/Systina12`, as supplied by the owner. No funding URL is set.
-- Command ID remains `copy`; Obsidian adds the plugin prefix itself.
-- Version `0.1.1` changes the palette command name to `Copy selection` to follow
-  Obsidian's command naming guideline. The editor menu remains `Copy with footnotes`;
-  both entry points still use the same `copySelection()` implementation.
+The minimum version remains 1.8.7: `CachedMetadata.footnotes` arrived in 1.6.6
+and `footnoteRefs` in 1.8.7. The implementation uses:
 
-## Release Checklist
+- Editor text, selection, cursor, and offset APIs, plus `Editor.transaction()`.
+- `MarkdownView`, its source/preview mode, and `save()` for metadata refresh.
+- `MetadataCache.getFileCache()` and `changed(file, source, cache)`.
+- Registered `editor-change`, `editor-menu`, and vault `modify` events.
+- Command registration/removal, settings persistence, `PluginSettingTab`,
+  `registerEditorExtension()`, and `Notice`.
+- `navigator.clipboard.readText()` and `writeText()`.
+- CodeMirror's public transaction extension and `isolateHistory` annotation.
 
-- Author metadata has been supplied by the owner and filled in `manifest.json`.
-- The repository's existing MIT license names Systina12 and was preserved.
-- In Desktop Source mode and Live Preview, select text and confirm both
-  palette command Copy selection and right-click Copy with footnotes produce the same text.
-- Check that empty selections have no added menu item, the native Copy item is
-  unchanged, and a right-click in another split copies from that editor.
-- Check the system clipboard with multiline and recursive definitions, immediate
-  edits, and code-fence examples. The note and selection must remain unchanged.
-- Disable/re-enable the plugin and confirm no duplicate menu items. Repeat the
-  applicable selection/clipboard checks on Android and iOS; verify a brief Notice
-  on clipboard failure when the platform permits reproducing it. Real worker
-  execution and API-boundary tests are not full-app or physical-device tests.
-- Create a GitHub release tagged `0.1.1` with `main.js` and `manifest.json`.
-  `versions.json` belongs in the repository. No `styles.css` is needed.
-- Follow the current [official submission guide](https://docs.obsidian.md/plugins/releasing/submit-plugin):
-  sign in at [community.obsidian.md](https://community.obsidian.md), link the
-  owner's GitHub account, and add the plugin for automated review. The directory
-  reads `manifest.json` at the default branch HEAD, so the final metadata must
-  be committed and pushed by the owner before submission. The matching GitHub
-  release assets are also required.
-- The only command is Copy selection; the editor menu item is Copy with footnotes.
-  Ctrl+C, paste, collision resolution,
-  renumbering, citations, wikilinks, embeds, attachments, and other requested
-  exclusions remain outside version 0.1.1.
+Obsidian and CodeMirror are external host modules. Clipboard parsing uses
+bundled `mdast-util-from-markdown`, `mdast-util-gfm-footnote`, and
+`micromark-extension-gfm-footnote`. The build includes licenses for every bundled
+package. There are no runtime Node/Electron imports, network requests,
+telemetry, or CSS assets.
+
+Destination footnote positions come from Obsidian metadata. Affected sections
+and their adjoining blocks are checked again after the planned edits, without
+reparsing the entire note. Existing definition ranges and unaffected references
+must remain valid, and inserted references must still be references. This
+rejects new code fences, inline code/math, or duplicate definitions formed at
+the paste boundary. Metadata remains authoritative for collecting destination
+definitions. Short probes distinguish indented code from list continuations.
+
+## Cache and source fidelity
+
+The current editor text supplies all copied or rewritten content. The plugin
+keeps the source/cache pair from `changed` in a WeakMap keyed by file.
+
+- A cached pair must match the current buffer. LF/CRLF differences alone are
+  projected into current offsets without modifying the cached object.
+- Bounds, reference text, definition markers, IDs, and line endings are checked.
+  A visible traditional definition missing from destination metadata cancels Paste.
+- Paste calls `MarkdownView.save()` when a matching snapshot is unavailable,
+  then waits up to three seconds for metadata. The former 1.5-second wait could
+  expire before Obsidian's two-second automatic-save debounce.
+- The file, active editor, source, selection, lifecycle, and enabled state are
+  rechecked after asynchronous work. A disposed editor is not queried.
+- Copy returns the original selection while an observed edit lacks matching
+  metadata. It does not guess among conflicting duplicate definitions.
+
+Obsidian has no public synchronous reparse API or historical source version for
+caches created before plugin activation. Startup caches also rely on local
+position checks. An unobserved earlier syntax change that preserves all checked
+positions cannot be ruled out completely; this remains an API limitation.
+
+## Parsing, placement, and history
+
+Native ranges include complete multiline definitions, paragraph breaks,
+indentation, lazy continuation, CRLF, and code fences within definitions.
+Inline footnotes are excluded from traditional definitions. Copy preserves raw
+Markdown and traverses dependencies iteratively, in first-reference order,
+with cycle protection.
+
+Paste covers numeric/named conflicts, existing duplicate IDs, reuse after
+renaming, dependency graphs and cycles, all placement settings, multiple
+blocks and tie breaking, replacement ranges, definitions-only clipboards,
+line endings, and unsafe insertion contexts. A cancelled plan has no edits.
+An accepted plan contains at most one body replacement and one definition
+insertion. CodeMirror tests check history isolation from adjacent typing as
+well as consecutive pastes.
+
+Integration tests cover default-off behavior, shared commands and menus,
+settings persistence errors and toggles, unavailable clipboard APIs,
+concurrent invocations, save/index waits, timeout recovery, closing an editor,
+disabling the feature, and unloading during an operation.
+
+## Release and platform checks
+
+The manifest ID is `copy-with-footnotes`; author is `Systina12`. Copy retains
+command ID `copy`, command name **Copy selection**, and menu label **Copy with
+footnotes**. Paste uses ID `paste`, command name **Paste clipboard**, and menu
+label **Paste with footnotes**.
+
+Before a new release, choose its version and update the manifest, package
+metadata, and `versions.json`. Preserve the 0.1.0 and 0.1.1 records and tags.
+Release assets are `main.js` and `manifest.json`; no empty `styles.css` is needed.
+Follow the current [submission guide](https://docs.obsidian.md/plugins/releasing/submit-plugin)
+for Community Directory review.
+
+Android/iOS physical-device checks remain outstanding. Worker and desktop
+application results do not establish every mobile clipboard or host behavior.
+See [Experimental Paste](experimental-paste.md) for user-facing behavior.

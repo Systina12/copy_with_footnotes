@@ -1,0 +1,951 @@
+[
+  {
+    "name": "empty note",
+    "target": "|",
+    "clipboard": "Hello world.[^1]\n\n[^1]: Source A.",
+    "expected": "Hello world.[^1]\n\n[^1]: Source A.",
+    "expectedIds": [
+      "1"
+    ]
+  },
+  {
+    "name": "no conflict",
+    "target": "|\n\n[^1]: Existing",
+    "clipboard": "Text.[^2]\n\n[^2]: New",
+    "expected": "Text.[^2]\n\n[^1]: Existing\n\n[^2]: New",
+    "expectedIds": [
+      "1",
+      "2"
+    ]
+  },
+  {
+    "name": "identical definition reused",
+    "target": "|\n\n[^smith]: Smith et al., 2024.",
+    "clipboard": "Hello.[^smith]\n\n[^smith]: Smith et al., 2024.",
+    "expected": "Hello.[^smith]\n\n[^smith]: Smith et al., 2024.",
+    "expectedIds": [
+      "smith"
+    ]
+  },
+  {
+    "name": "numeric conflict uses maximum plus one",
+    "target": "|\n\n[^1]: Existing\n[^4]: Existing\n[^9]: Existing",
+    "clipboard": "Text.[^1]\n\n[^1]: Incoming",
+    "expected": "Text.[^10]\n\n[^1]: Existing\n[^4]: Existing\n[^9]: Existing\n\n[^10]: Incoming",
+    "expectedIds": [
+      "1",
+      "4",
+      "9",
+      "10"
+    ]
+  },
+  {
+    "name": "reserve incoming IDs before allocating",
+    "target": "|\n\n[^1]: Existing.",
+    "clipboard": "A.[^1]\nB.[^2]\n\n[^1]: Foo.\n[^2]: See also [^1].",
+    "expected": "A.[^3]\nB.[^2]\n\n[^1]: Existing.\n\n[^3]: Foo.\n[^2]: See also [^3].",
+    "expectedIds": [
+      "1",
+      "3",
+      "2"
+    ]
+  },
+  {
+    "name": "multiple numeric conflicts and a high incoming ID",
+    "target": "|\n\n[^1]: Old\n[^4]: Old",
+    "clipboard": "A[^1] B[^4] C[^20]\n\n[^1]: New A\n[^4]: New B\n[^20]: New C",
+    "expected": "A[^21] B[^22] C[^20]\n\n[^1]: Old\n[^4]: Old\n\n[^21]: New A\n[^22]: New B\n[^20]: New C",
+    "expectedIds": [
+      "1",
+      "4",
+      "21",
+      "22",
+      "20"
+    ]
+  },
+  {
+    "name": "named suffix skips occupied names",
+    "target": "|\n\n[^smith]: Old\n[^smith-2]: Reserved",
+    "clipboard": "Hello.[^smith]\n\n[^smith]: Incoming",
+    "expected": "Hello.[^smith-3]\n\n[^smith]: Old\n[^smith-2]: Reserved\n\n[^smith-3]: Incoming",
+    "expectedIds": [
+      "smith",
+      "smith-2",
+      "smith-3"
+    ]
+  },
+  {
+    "name": "repeated references and case-insensitive collisions",
+    "target": "|\n\n[^smith]: Old",
+    "clipboard": "A[^Smith] B[^SMITH]\n\n[^Smith]: New",
+    "expected": "A[^Smith-2] B[^Smith-2]\n\n[^smith]: Old\n\n[^Smith-2]: New"
+  },
+  {
+    "name": "identical parent must follow its renamed child",
+    "target": "|\n\n[^a]: See [^b].\n[^b]: Old",
+    "clipboard": "A[^a]\n\n[^a]: See [^b].\n[^b]: New",
+    "expected": "A[^a-2]\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: New",
+    "expectedIds": [
+      "a",
+      "b",
+      "a-2",
+      "b-2"
+    ]
+  },
+  {
+    "name": "cyclic dependency invalidation",
+    "target": "|\n\n[^a]: See [^b].\n[^b]: Old",
+    "clipboard": "A[^a]\n\n[^a]: See [^b].\n[^b]: See [^a].",
+    "expected": "A[^a-2]\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: See [^a-2].",
+    "expectedIds": [
+      "a",
+      "b",
+      "a-2",
+      "b-2"
+    ]
+  },
+  {
+    "name": "identical duplicate destination IDs remain usable",
+    "target": "|\n\n[^a]: Same\n\n[^a]: Same",
+    "clipboard": "A[^a]\n\n[^a]: Same",
+    "expected": "A[^a]\n\n[^a]: Same\n\n[^a]: Same",
+    "expectedIds": [
+      "a",
+      "a"
+    ]
+  },
+  {
+    "name": "different duplicate destination IDs only rename incoming",
+    "target": "|\n\n[^a]: Same\n\n[^a]: Other",
+    "clipboard": "A[^a]\n\n[^a]: Same",
+    "expected": "A[^a-2]\n\n[^a]: Same\n\n[^a]: Other\n\n[^a-2]: Same",
+    "expectedIds": [
+      "a",
+      "a",
+      "a-2"
+    ]
+  },
+  {
+    "name": "unrelated duplicate destination IDs do not block paste",
+    "target": "|\n\n[^a]: One\n[^a]: Two",
+    "clipboard": "B[^b]\n\n[^b]: New",
+    "expected": "B[^b]\n\n[^a]: One\n[^a]: Two\n\n[^b]: New"
+  },
+  {
+    "name": "insert before the chosen block",
+    "target": "|\n\n[^old]: Old",
+    "clipboard": "New[^n]\n\n[^n]: New source",
+    "insertionSide": "before",
+    "expected": "New[^n]\n\n[^n]: New source\n\n[^old]: Old"
+  },
+  {
+    "name": "nearest block above moves final caret",
+    "target": "[^up]: Up\n\n|\n\nA long paragraph separates these footnote blocks.\n\n[^down]: Down",
+    "clipboard": "New[^n]\n\n[^n]: N",
+    "expected": "[^up]: Up\n\n[^n]: N\n\nNew[^n]\n\nA long paragraph separates these footnote blocks.\n\n[^down]: Down"
+  },
+  {
+    "name": "nearest block below",
+    "target": "[^up]: Up\n\nA long paragraph separates these footnote blocks.\n\n|\n\n[^down]: Down",
+    "clipboard": "New[^n]\n\n[^n]: N",
+    "expected": "[^up]: Up\n\nA long paragraph separates these footnote blocks.\n\nNew[^n]\n\n[^down]: Down\n\n[^n]: N"
+  },
+  {
+    "name": "next chooses the lower block even when upper is nearer",
+    "target": "[^up]: Up\n\n|\n\nA long paragraph separates these footnote blocks.\n\n[^down]: Down",
+    "clipboard": "New[^n]\n\n[^n]: N",
+    "placement": "next",
+    "expected": "[^up]: Up\n\nNew[^n]\n\nA long paragraph separates these footnote blocks.\n\n[^down]: Down\n\n[^n]: N"
+  },
+  {
+    "name": "next with no later block falls back to EOF",
+    "target": "[^up]: Up\n\nTail |",
+    "clipboard": "New[^n]\n\n[^n]: N",
+    "placement": "next",
+    "expected": "[^up]: Up\n\nTail New[^n]\n\n[^n]: N"
+  },
+  {
+    "name": "explicit EOF ignores before setting",
+    "target": "|\n\n[^old]: Old\n\nLast paragraph.",
+    "clipboard": "New[^n]\n\n[^n]: N",
+    "placement": "end",
+    "insertionSide": "before",
+    "expected": "New[^n]\n\n[^old]: Old\n\nLast paragraph.\n\n[^n]: N"
+  },
+  {
+    "name": "replace nonempty selection",
+    "target": "Before |REPLACE after\n\n[^1]: Existing",
+    "selection": "REPLACE",
+    "clipboard": "Hello[^1]\n\n[^1]: New",
+    "expected": "Before Hello[^2] after\n\n[^1]: Existing\n\n[^2]: New"
+  },
+  {
+    "name": "replacement and definition insertion meet at EOF",
+    "target": "Before |REPLACE",
+    "selection": "REPLACE",
+    "clipboard": "Hello[^1]\n\n[^1]: New",
+    "expected": "Before Hello[^1]\n\n[^1]: New"
+  },
+  {
+    "name": "caret at EOF without a terminal newline",
+    "target": "Prefix |",
+    "clipboard": "Hello[^1]\n\n[^1]: New",
+    "expected": "Prefix Hello[^1]\n\n[^1]: New"
+  },
+  {
+    "name": "multiline and multiple paragraphs retain indentation",
+    "target": "|",
+    "clipboard": "Long[^a]\n\n[^a]: First\n    Second\n\n    Third paragraph",
+    "expected": "Long[^a]\n\n[^a]: First\n    Second\n\n    Third paragraph"
+  },
+  {
+    "name": "native lazy continuation is supported",
+    "target": "|",
+    "clipboard": "Long[^a]\n\n[^a]: First\nLazy continuation",
+    "expected": "Long[^a]\n\n[^a]: First\nLazy continuation"
+  },
+  {
+    "name": "CRLF source and clipboard",
+    "target": "|\r\n\r\n[^1]: Old",
+    "clipboard": "A[^1]\r\nB\r\n\r\n[^1]: First\r\n    Second",
+    "expected": "A[^2]\r\nB\r\n\r\n[^1]: Old\r\n\r\n[^2]: First\r\n    Second"
+  },
+  {
+    "name": "definitions scattered between body paragraphs",
+    "target": "|",
+    "clipboard": "Before[^a]\n\n[^a]: A\n\nMiddle[^b]\n\n[^b]: B\n\nLast",
+    "expected": "Before[^a]\n\nMiddle[^b]\n\nLast\n\n[^a]: A\n[^b]: B"
+  },
+  {
+    "name": "first reference order is not numeric order",
+    "target": "|\n\n[^1]: Old",
+    "clipboard": "F[^foo] N[^1] B[^bar]\n\n[^bar]: B\n[^1]: N\n[^foo]: F",
+    "expected": "F[^foo] N[^2] B[^bar]\n\n[^1]: Old\n\n[^foo]: F\n[^2]: N\n[^bar]: B",
+    "expectedIds": [
+      "1",
+      "foo",
+      "2",
+      "bar"
+    ]
+  },
+  {
+    "name": "code references and definitions stay literal",
+    "target": "|\n\n[^1]: Old",
+    "clipboard": "`[^1]` Real[^1]\n\n```md\n[^1]: literal\n```\n\n[^1]: New",
+    "expected": "`[^1]` Real[^2]\n\n```md\n[^1]: literal\n```\n\n[^1]: Old\n\n[^2]: New"
+  },
+  {
+    "name": "missing definition is ordinary paste",
+    "target": "Before |after",
+    "clipboard": "Hello[^missing]",
+    "expected": "Before Hello[^missing]after"
+  },
+  {
+    "name": "plain text does not need footnote processing",
+    "target": "Before |REPLACE after",
+    "selection": "REPLACE",
+    "clipboard": "hello world",
+    "expected": "Before hello world after"
+  },
+  {
+    "name": "empty clipboard does not delete a selection",
+    "target": "Before |KEEP after",
+    "selection": "KEEP",
+    "clipboard": "",
+    "expected": "Before KEEP after"
+  },
+  {
+    "name": "duplicate clipboard definitions cancel without changing the note",
+    "target": "|",
+    "clipboard": "A[^a]\n\n[^a]: First\n[^a]: Second",
+    "expected": "",
+    "cancelReason": "Duplicate footnote IDs in the clipboard"
+  },
+  {
+    "name": "container definitions cancel without changing the note",
+    "target": "|",
+    "clipboard": "A[^a]\n\n> [^a]: Quoted",
+    "expected": "",
+    "cancelReason": "Footnote definitions inside lists or quotes"
+  },
+  {
+    "name": "selection inside an existing definition cancels",
+    "target": "Text[^a]\n\n[^a]: Old |value",
+    "clipboard": "New[^b]\n\n[^b]: B",
+    "expected": "Text[^a]\n\n[^a]: Old value",
+    "cancelReason": "The selection overlaps an existing footnote definition"
+  },
+  {
+    "name": "paste inside code cancels footnote processing",
+    "target": "```text\n|\n```",
+    "clipboard": "New[^b]\n\n[^b]: B",
+    "expected": "```text\n\n```",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "cannot put separated definitions into an unclosed fence",
+    "target": "|\n\n```text\ncode",
+    "clipboard": "New[^b]\n\n[^b]: B",
+    "expected": "\n\n```text\ncode",
+    "cancelReason": "The footnote location is inside protected Markdown syntax"
+  },
+  {
+    "name": "definitions-only clipboard leaves caret at body position",
+    "target": "|Title",
+    "clipboard": "[^a]: A",
+    "expected": "Title\n\n[^a]: A"
+  },
+  {
+    "name": "numeric allocation exceeds Number safe integer",
+    "target": "|\n\n[^9007199254740993]: Old",
+    "clipboard": "A[^9007199254740993]\n\n[^9007199254740993]: New",
+    "expected": "A[^9007199254740994]\n\n[^9007199254740993]: Old\n\n[^9007199254740994]: New"
+  },
+  {
+    "name": "non-ASCII labels",
+    "target": "|\n\n[^来源]: 旧来源",
+    "clipboard": "正文[^来源]\n\n[^来源]: 新来源",
+    "expected": "正文[^来源-2]\n\n[^来源]: 旧来源\n\n[^来源-2]: 新来源"
+  },
+  {
+    "name": "ordinary Obsidian syntax does not force fallback",
+    "target": "|",
+    "clipboard": "[[Note]] %%keep%% $a+b$ Text.[^n]\n\n[^n]: N",
+    "expected": "[[Note]] %%keep%% $a+b$ Text.[^n]\n\n[^n]: N"
+  },
+  {
+    "name": "unresolved destination IDs are reserved",
+    "target": "|Unresolved[^2]\n\n[^1]: Old",
+    "clipboard": "A[^1]\n\n[^1]: New",
+    "expected": "A[^3]Unresolved[^2]\n\n[^1]: Old\n\n[^3]: New",
+    "expectedIds": [
+      "1",
+      "3"
+    ]
+  },
+  {
+    "name": "definition insertion at the start of a replacement",
+    "target": "[^old]: Old|\n\nREPLACE",
+    "selection": "\n\nREPLACE",
+    "clipboard": "Body[^n]\n\n[^n]: N",
+    "expected": "[^old]: Old\n\n[^n]: N\n\nBody[^n]"
+  },
+  {
+    "name": "equality normalizes line endings and outer whitespace only",
+    "target": "|\n\n[^a]: First\n    Second",
+    "clipboard": "A[^a]\r\n\r\n  [^a]: First\r\n    Second\r\n",
+    "expected": "A[^a]\n\n[^a]: First\n    Second",
+    "expectedIds": [
+      "a"
+    ]
+  },
+  {
+    "name": "reuse a previous numeric allocation",
+    "target": "|\n\n[^1]: Old\n\n[^2]: New",
+    "clipboard": "Hello[^1]\n\n[^1]: New",
+    "expected": "Hello[^2]\n\n[^1]: Old\n\n[^2]: New",
+    "expectedIds": [
+      "1",
+      "2"
+    ],
+    "summary": {
+      "added": 0,
+      "reused": 1,
+      "renamed": 1
+    }
+  },
+  {
+    "name": "reuse a previous named allocation",
+    "target": "|\n\n[^smith]: Old\n\n[^smith-2]: New",
+    "clipboard": "Hello[^smith]\n\n[^smith]: New",
+    "expected": "Hello[^smith-2]\n\n[^smith]: Old\n\n[^smith-2]: New",
+    "summary": {
+      "added": 0,
+      "reused": 1,
+      "renamed": 1
+    }
+  },
+  {
+    "name": "reuse a previous cyclic allocation",
+    "target": "|\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: See [^a-2].",
+    "clipboard": "A[^a]\n\n[^a]: See [^b].\n[^b]: See [^a].",
+    "expected": "A[^a-2]\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: See [^a-2].",
+    "summary": {
+      "added": 0,
+      "reused": 2,
+      "renamed": 2
+    }
+  },
+  {
+    "name": "never reuse a parent with a different dependency",
+    "target": "|\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: Wrong",
+    "clipboard": "A[^a]\n\n[^a]: See [^b].\n[^b]: New",
+    "expected": "A[^a-3]\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: Wrong\n\n[^a-3]: See [^b-3].\n[^b-3]: New"
+  },
+  {
+    "name": "nonconflicting IDs are preserved even when content exists under another ID",
+    "target": "|\n\n[^2]: Same",
+    "clipboard": "A[^1]\n\n[^1]: Same",
+    "expected": "A[^1]\n\n[^2]: Same\n\n[^1]: Same",
+    "expectedIds": [
+      "2",
+      "1"
+    ]
+  },
+  {
+    "name": "footnote label case does not duplicate identical content",
+    "target": "|\n\n[^smith]: Same",
+    "clipboard": "Hello[^Smith]\n\n[^Smith]: Same",
+    "expected": "Hello[^Smith]\n\n[^smith]: Same",
+    "summary": {
+      "added": 0,
+      "reused": 1,
+      "renamed": 0
+    }
+  },
+  {
+    "name": "extracting definitions preserves the next body indentation",
+    "target": "|",
+    "clipboard": "Text[^a]\n\n[^a]: A\n\n  # Indented",
+    "expected": "Text[^a]\n\n  # Indented\n\n[^a]: A"
+  },
+  {
+    "name": "comment delimiters in inline code are literal",
+    "target": "|",
+    "clipboard": "`%%` Text[^a]\n\n[^a]: A",
+    "expected": "`%%` Text[^a]\n\n[^a]: A"
+  },
+  {
+    "name": "dollar signs in frontmatter do not open math blocks",
+    "target": "|",
+    "clipboard": "---\nexample: \"$$\"\n---\nText[^a]\n\n[^a]: A",
+    "expected": "---\nexample: \"$$\"\n---\nText[^a]\n\n[^a]: A"
+  },
+  {
+    "name": "identical definitions-only clipboard cannot delete the selected body",
+    "target": "|Keep this\n\n[^a]: A",
+    "selection": "Keep this",
+    "clipboard": "[^a]: A",
+    "expected": "Keep this\n\n[^a]: A",
+    "summary": {
+      "added": 0,
+      "reused": 1,
+      "renamed": 0
+    }
+  },
+  {
+    "name": "inline footnotes in the target are not stale traditional definitions",
+    "target": "|A^[inline]\n\n[^a]: A",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "New[^a]A^[inline]\n\n[^a]: A"
+  },
+  {
+    "name": "paste into inline code is cancelled",
+    "target": "Text `li|teral`\n\n[^a]: A",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Text `literal`\n\n[^a]: A",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "replacing a full sentence containing inline code is allowed",
+    "target": "|Before `old` after\n\n[^1]: Old",
+    "selection": "Before `old` after",
+    "clipboard": "Hello[^1]\n\n[^1]: New",
+    "expected": "Hello[^2]\n\n[^1]: Old\n\n[^2]: New"
+  },
+  {
+    "name": "unclosed comment in the destination cannot absorb new definitions",
+    "target": "|Start\n\n%%\nhidden",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Start\n\n%%\nhidden",
+    "cancelReason": "The footnote location is inside protected Markdown syntax"
+  },
+  {
+    "name": "unclosed comment in the clipboard is cancelled",
+    "target": "|",
+    "clipboard": "Text[^a]\n\n[^a]: A\n\n%%\nhidden",
+    "expected": "",
+    "cancelReason": "Unclosed Markdown block in the clipboard"
+  },
+  {
+    "name": "unclosed math in the destination cannot absorb new definitions",
+    "target": "|Start\n\n$$\nx",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Start\n\n$$\nx",
+    "cancelReason": "The footnote location is inside protected Markdown syntax"
+  },
+  {
+    "name": "unclosed math in the clipboard is cancelled",
+    "target": "|",
+    "clipboard": "Text[^a]\n\n[^a]: A\n\n$$\nx",
+    "expected": "",
+    "cancelReason": "Unclosed Markdown block in the clipboard"
+  },
+  {
+    "name": "unclosed HTML comment in the destination cannot absorb new definitions",
+    "target": "|Start\n\n<!-- hidden",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Start\n\n<!-- hidden",
+    "cancelReason": "The footnote location is inside protected Markdown syntax"
+  },
+  {
+    "name": "unclosed HTML comment in the clipboard is cancelled",
+    "target": "|",
+    "clipboard": "Text[^a]\n\n[^a]: A\n\n<!-- hidden",
+    "expected": "",
+    "cancelReason": "Unclosed Markdown block in the clipboard"
+  },
+  {
+    "name": "unclosed raw HTML in the destination cannot absorb new definitions",
+    "target": "|Start\n\n<script>hidden",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Start\n\n<script>hidden",
+    "cancelReason": "The footnote location is inside protected Markdown syntax"
+  },
+  {
+    "name": "unclosed raw HTML in the clipboard is cancelled",
+    "target": "|",
+    "clipboard": "Text[^a]\n\n[^a]: A\n\n<script>hidden",
+    "expected": "",
+    "cancelReason": "Unclosed Markdown block in the clipboard"
+  },
+  {
+    "name": "unclosed invalid closing fence in the destination cannot absorb new definitions",
+    "target": "|Start\n\n```txt\n    ```",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Start\n\n```txt\n    ```",
+    "cancelReason": "The footnote location is inside protected Markdown syntax"
+  },
+  {
+    "name": "unclosed invalid closing fence in the clipboard is cancelled",
+    "target": "|",
+    "clipboard": "Text[^a]\n\n[^a]: A\n\n```txt\n    ```",
+    "expected": "",
+    "cancelReason": "Unclosed Markdown block in the clipboard"
+  },
+  {
+    "name": "paste into inline math is cancelled",
+    "target": "$x|y$",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "$xy$",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "paste into an inline comment is cancelled",
+    "target": "Before %%hid|den%% after",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Before %%hidden%% after",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "paste into a wikilink is cancelled",
+    "target": "[[pa|ge]]",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "[[page]]",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "paste into an inline footnote is cancelled",
+    "target": "Text ^[in|line]",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Text ^[inline]",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "paste into a Markdown link destination is cancelled",
+    "target": "[text](https://example.com/pa|th)",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "[text](https://example.com/path)",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "paste into an image label is cancelled",
+    "target": "![al|t](image.png)",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "![alt](image.png)",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "paste into an autolink is cancelled",
+    "target": "<https://example.com/pa|th>",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "<https://example.com/path>",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "paste into an HTML attribute is cancelled",
+    "target": "<span title=\"va|lue\">text</span>",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "<span title=\"value\">text</span>",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "paste into a reference link definition is cancelled",
+    "target": "[ref]: https://example.com/pa|th",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "[ref]: https://example.com/path",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "replacing a complete link remains a normal footnote paste",
+    "target": "|[old](https://example.com)",
+    "selection": "[old](https://example.com)",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "New[^a]\n\n[^a]: A",
+    "expectedIds": [
+      "a"
+    ]
+  },
+  {
+    "name": "replacing complete inline math remains a normal footnote paste",
+    "target": "|$x$",
+    "selection": "$x$",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "New[^a]\n\n[^a]: A",
+    "expectedIds": [
+      "a"
+    ]
+  },
+  {
+    "name": "paste immediately after a complete link remains allowed",
+    "target": "[old](https://example.com)|",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "[old](https://example.com)New[^a]\n\n[^a]: A",
+    "expectedIds": [
+      "a"
+    ]
+  },
+  {
+    "name": "an unclosed inline comment cannot absorb appended definitions",
+    "target": "|Before %% open",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Before %% open",
+    "cancelReason": "The footnote location is inside protected Markdown syntax"
+  },
+  {
+    "name": "paste into a Markdown link label preserves footnote references",
+    "target": "[te|xt](https://example.com)",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "[teNew[^a]xt](https://example.com)\n\n[^a]: A",
+    "expectedIds": [
+      "a"
+    ],
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "a preceding escape cannot hide the first pasted reference",
+    "target": "\\|",
+    "clipboard": "[^a]\n\n[^a]: A",
+    "expected": "\\",
+    "cancelReason": "The paste location would escape a footnote reference"
+  },
+  {
+    "name": "a preceding escaped backslash preserves the pasted reference",
+    "target": "\\\\|",
+    "clipboard": "[^a]\n\n[^a]: A",
+    "expected": "\\\\[^a]\n\n[^a]: A",
+    "expectedIds": [
+      "a"
+    ],
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "indentation with spaces cannot turn the pasted body into code",
+    "target": "    |",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "    ",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "indentation with a tab cannot turn the pasted body into code",
+    "target": "\t|",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "\t",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "indentation with a blank line after a paragraph cannot turn the pasted body into code",
+    "target": "Paragraph\n\n    |",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Paragraph\n\n    ",
+    "cancelReason": "The paste location is inside protected Markdown syntax"
+  },
+  {
+    "name": "pasting into a list continuation keeps the reference visible",
+    "target": "- item\n    |",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "- item\n    New[^a]\n\n[^a]: A",
+    "expectedIds": [
+      "a"
+    ],
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "pasting into a lazy paragraph continuation keeps the reference visible",
+    "target": "Paragraph\n    |",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "Paragraph\n    New[^a]\n\n[^a]: A",
+    "expectedIds": [
+      "a"
+    ],
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "pasting into a quote keeps the reference visible",
+    "target": "> |",
+    "clipboard": "New[^a]\n\n[^a]: A",
+    "expected": "> New[^a]\n\n[^a]: A",
+    "expectedIds": [
+      "a"
+    ],
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "joined backticks cannot hide existing definitions",
+    "target": "``|\n\n[^old]: Existing",
+    "clipboard": "`\nText[^a]\n\n[^a]: A",
+    "cancelReason": "The paste would change footnote or Markdown boundaries",
+    "expected": "``\n\n[^old]: Existing"
+  },
+  {
+    "name": "joined tildes cannot hide existing definitions",
+    "target": "~~|\n\n[^old]: Existing",
+    "clipboard": "~\nText[^a]\n\n[^a]: A",
+    "cancelReason": "The paste would change footnote or Markdown boundaries",
+    "expected": "~~\n\n[^old]: Existing"
+  },
+  {
+    "name": "joined inline code cannot hide the incoming reference",
+    "target": "`|",
+    "clipboard": "Text[^a]`\n\n[^a]: A",
+    "cancelReason": "The paste would change footnote or Markdown boundaries",
+    "expected": "`"
+  },
+  {
+    "name": "joined inline code cannot hide an existing reference",
+    "target": "`Old[^old]|\n\n[^old]: Existing",
+    "clipboard": "` New[^a]\n\n[^a]: A",
+    "cancelReason": "The paste would change footnote or Markdown boundaries",
+    "expected": "`Old[^old]\n\n[^old]: Existing"
+  },
+  {
+    "name": "a following colon cannot create a second definition",
+    "target": "|: trailing text",
+    "clipboard": "[^a]\n\n[^a]: Incoming",
+    "cancelReason": "The paste would change footnote or Markdown boundaries",
+    "expected": ": trailing text"
+  },
+  {
+    "name": "joined inline math cannot hide the pasted reference",
+    "target": "|$",
+    "clipboard": "$Text[^a]\n\n[^a]: A",
+    "cancelReason": "The paste would change footnote or Markdown boundaries",
+    "expected": "$"
+  },
+  {
+    "name": "replacement cannot remove separation before an existing definition",
+    "target": "|Replace\n\n[^old]: Old",
+    "selection": "Replace\n\n",
+    "clipboard": "Text[^a]\n\n[^a]: A",
+    "cancelReason": "The paste would change footnote or Markdown boundaries",
+    "expected": "Replace\n\n[^old]: Old"
+  },
+  {
+    "name": "inserting definitions before a block restores replacement separation",
+    "target": "|Replace\n\n[^old]: Old",
+    "selection": "Replace\n\n",
+    "clipboard": "Text[^a]\n\n[^a]: A",
+    "insertionSide": "before",
+    "expected": "Text[^a]\n\n[^a]: A\n\n[^old]: Old",
+    "expectedIds": [
+      "a",
+      "old"
+    ],
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "replacement preserving existing separation remains allowed",
+    "target": "|Replace\n\n[^old]: Old",
+    "selection": "Replace",
+    "clipboard": "Text[^a]\n\n[^a]: A",
+    "expected": "Text[^a]\n\n[^old]: Old\n\n[^a]: A",
+    "expectedIds": [
+      "old",
+      "a"
+    ],
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "removing a middle definition keeps body paragraphs separate",
+    "target": "|",
+    "clipboard": "First\n[^a]: A\n\nSecond[^a]",
+    "expected": "First\n\nSecond[^a]\n\n[^a]: A",
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "middle definition paragraph separation preserves CRLF",
+    "target": "|",
+    "clipboard": "First\r\n[^a]: A\r\n\r\nSecond[^a]",
+    "expected": "First\r\n\r\nSecond[^a]\r\n\r\n[^a]: A",
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "inline code brackets cannot end an inline footnote early",
+    "target": "|\n\n[^a]: Old",
+    "clipboard": "Text^[code `]` and [^a]]\n\n[^a]: New",
+    "cancelReason": "Footnotes inside unsupported Markdown syntax",
+    "expected": "\n\n[^a]: Old"
+  },
+  {
+    "name": "inline footnote guard skips multi-backtick code brackets",
+    "target": "|\n\n[^a]: Old",
+    "clipboard": "Text^[code ``]]`` and [^a]]\n\n[^a]: New",
+    "cancelReason": "Footnotes inside unsupported Markdown syntax",
+    "expected": "\n\n[^a]: Old"
+  },
+  {
+    "name": "inline code brackets do not expose the inside of a target inline footnote",
+    "target": "Text^[code `]` and |end]",
+    "clipboard": "Text[^a]\n\n[^a]: A",
+    "cancelReason": "The paste location is inside protected Markdown syntax",
+    "expected": "Text^[code `]` and end]"
+  },
+  {
+    "name": "a code bracket outside inline footnotes stays literal",
+    "target": "|",
+    "clipboard": "`]` Text[^a]\n\n[^a]: A",
+    "expected": "`]` Text[^a]\n\n[^a]: A",
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "dollar prices around a footnote remain ordinary text",
+    "target": "|",
+    "clipboard": "For $5, see[^a], or $10.\n\n[^a]: A",
+    "expected": "For $5, see[^a], or $10.\n\n[^a]: A",
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "dollar prices do not prevent incoming conflict renaming",
+    "target": "|\n\n[^a]: Old",
+    "clipboard": "For $5, see[^a], or $10.\n\n[^a]: A",
+    "expected": "For $5, see[^a-2], or $10.\n\n[^a]: Old\n\n[^a-2]: A",
+    "expectedIds": [
+      "a",
+      "a-2"
+    ],
+    "expectedRefs": [
+      "a-2"
+    ]
+  },
+  {
+    "name": "inline math may span a soft line break",
+    "target": "|",
+    "clipboard": "$x[^a]\ny$\n\n[^a]: A",
+    "cancelReason": "Footnotes inside unsupported Markdown syntax",
+    "expected": ""
+  },
+  {
+    "name": "inline math cannot span a blank paragraph",
+    "target": "|",
+    "clipboard": "$x[^a]\n\ny$\n\n[^a]: A",
+    "expected": "$x[^a]\n\ny$\n\n[^a]: A",
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "valid inline math outside references stays unchanged",
+    "target": "|",
+    "clipboard": "$x$ Text[^a]\n\n[^a]: A",
+    "expected": "$x$ Text[^a]\n\n[^a]: A",
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "dollar delimiter with opening whitespace is ordinary text",
+    "target": "|",
+    "clipboard": "$ x[^a]$\n\n[^a]: A",
+    "expected": "$ x[^a]$\n\n[^a]: A",
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "dollar delimiter with closing whitespace is ordinary text",
+    "target": "|",
+    "clipboard": "$x[^a] $\n\n[^a]: A",
+    "expected": "$x[^a] $\n\n[^a]: A",
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "dollar delimiter with following digit is ordinary text",
+    "target": "|",
+    "clipboard": "$x[^a]$2\n\n[^a]: A",
+    "expected": "$x[^a]$2\n\n[^a]: A",
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "one newline cannot leave an existing definition inside a paragraph",
+    "target": "|Replace\n\n[^old]: Old",
+    "selection": "Replace\n\n",
+    "clipboard": "[^a]: A\n\nText[^a]\n",
+    "cancelReason": "The paste would change footnote or Markdown boundaries",
+    "expected": "Replace\n\n[^old]: Old"
+  },
+  {
+    "name": "two newlines retain an existing definition after replacement",
+    "target": "|Replace\n\n[^old]: Old",
+    "selection": "Replace\n\n",
+    "clipboard": "[^a]: A\n\nText[^a]\n\n",
+    "expected": "Text[^a]\n\n[^old]: Old\n\n[^a]: A",
+    "expectedIds": [
+      "old",
+      "a"
+    ],
+    "expectedRefs": [
+      "a"
+    ]
+  },
+  {
+    "name": "an unresolved clipboard reference may use an existing target definition",
+    "target": "|Old[^existing]\n\n[^existing]: Existing",
+    "clipboard": "New[^a] and [^existing]\n\n[^a]: A",
+    "expected": "New[^a] and [^existing]Old[^existing]\n\n[^existing]: Existing\n\n[^a]: A",
+    "expectedIds": [
+      "existing",
+      "a"
+    ],
+    "expectedRefs": [
+      "a",
+      "existing",
+      "existing"
+    ]
+  }
+]

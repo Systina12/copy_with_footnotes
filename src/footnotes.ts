@@ -32,6 +32,7 @@ export function buildClipboardText({ source, selectionStart, selectionEnd, cache
   }
 
   const definitions = new Map<string, { start: number; end: number }>();
+  const ambiguous = new Set<string>();
   for (const definition of cache.footnotes ?? []) {
     const from = offset(definition);
     const to = offset(definition, true);
@@ -43,11 +44,24 @@ export function buildClipboardText({ source, selectionStart, selectionEnd, cache
 
     // Include an existing blockquote/list prefix so the raw multiline block stays intact.
     const lineStart = source.lastIndexOf("\n", from - 1) + 1;
-    if (!definitions.has(definition.id)) definitions.set(definition.id, { start: lineStart, end: to });
+    const existing = definitions.get(definition.id);
+    if (existing && source.slice(existing.start, existing.end).replace(/\r\n?/g, "\n").trim() !==
+        source.slice(lineStart, to).replace(/\r\n?/g, "\n").trim()) ambiguous.add(definition.id);
+    if (!existing) definitions.set(definition.id, { start: lineStart, end: to });
   }
 
-  const inRange = (from: number, to: number) =>
-    refs.filter((ref) => offset(ref) >= from && offset(ref, true) <= to);
+  const inRange = (from: number, to: number) => {
+    let low = 0, high = refs.length;
+    while (low < high) {
+      const middle = (low + high) >>> 1;
+      if (offset(refs[middle]) < from) low = middle + 1; else high = middle;
+    }
+    const result: typeof refs = [];
+    for (let i = low; i < refs.length && offset(refs[i]) < to; i++) {
+      if (offset(refs[i], true) <= to) result.push(refs[i]);
+    }
+    return result;
+  };
   const pending = inRange(start, end).map((ref) => ref.id).reverse();
   const visited = new Set<string>();
   const appended: string[] = [];
@@ -56,7 +70,7 @@ export function buildClipboardText({ source, selectionStart, selectionEnd, cache
     if (visited.has(id)) continue;
     visited.add(id);
     const definition = definitions.get(id);
-    if (!definition) continue;
+    if (!definition || ambiguous.has(id)) continue;
     if (definition.start < start || definition.end > end) {
       appended.push(source.slice(definition.start, definition.end));
     }

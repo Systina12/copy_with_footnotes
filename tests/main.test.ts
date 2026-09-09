@@ -2,11 +2,13 @@ import { buildSync } from "esbuild";
 import { runInNewContext } from "node:vm";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Command } from "obsidian";
+import * as cmState from "@codemirror/state";
+import * as cmCommands from "@codemirror/commands";
 import cases from "./cases.json";
 import captured from "./fixtures/obsidian-1.13.7.json";
 
 const compiled = buildSync({ entryPoints: ["src/main.ts"], bundle: true, write: false,
-  format: "cjs", external: ["obsidian"] }).outputFiles[0].text;
+  format: "cjs", platform: "node", external: ["obsidian", "@codemirror/state", "@codemirror/commands"] }).outputFiles[0].text;
 
 // Only public API boundaries are stubbed; no Obsidian App mock is needed.
 function harness() {
@@ -20,6 +22,7 @@ function harness() {
   const writeText = vi.fn().mockResolvedValue(undefined);
   const error = vi.fn();
   const registerEvent = vi.fn();
+  const registerEditorExtension = vi.fn();
   class TFile {}
   class MarkdownView {}
   class MenuItem {
@@ -46,21 +49,24 @@ function harness() {
     app = { workspace: { on, getActiveViewOfType: () => active ? view : null },
       metadataCache: { on, getFileCache }, vault: { on } };
     addCommand(command: Command) { commands.push(command); }
+    async loadData() { return undefined; }
+    addSettingTab() {}
     registerEvent = registerEvent;
+    registerEditorExtension = registerEditorExtension;
   }
   const exports = { exports: {} as { default: new () => {
-    onload: () => void;
+    onload: () => Promise<void>;
     copySelection: (...args: unknown[]) => Promise<void>;
   } } };
   const clipboard = { writeText };
-  runInNewContext(compiled, { module: exports, require: () => ({ Plugin, MarkdownView, TFile,
+  runInNewContext(compiled, { module: exports, require: (name: string) => name === "@codemirror/state" ? cmState : name === "@codemirror/commands" ? cmCommands : ({ Plugin, MarkdownView, TFile, PluginSettingTab: class {},
     Notice: class { constructor(text: string) { notices.push(text); } } }),
     navigator: { clipboard }, console: { error } });
   const plugin = new exports.exports.default();
-  plugin.onload();
+  const ready = plugin.onload();
   const copySelection = vi.spyOn(plugin, "copySelection");
   return {
-    commands, notices, writeText, registerEvent, clipboard, error, copySelection, getFileCache,
+    ready, commands, notices, writeText, registerEvent, registerEditorExtension, clipboard, error, copySelection, getFileCache,
     run: () => commands[0].callback!(),
     openMenu: (editor = view.editor, info = { file }) => {
       const items: MenuItem[] = [];
@@ -84,11 +90,12 @@ function harness() {
 
 describe("command integration", () => {
   let app: ReturnType<typeof harness>;
-  beforeEach(() => { app = harness(); });
+  beforeEach(async () => { app = harness(); await app.ready; });
 
   it("registers exactly one command and cleanup-managed listeners", () => {
     expect(app.commands.map(({ id, name }) => ({ id, name }))).toEqual([{ id: "copy", name: "Copy selection" }]);
     expect(app.registerEvent).toHaveBeenCalledTimes(4);
+    expect(app.registerEditorExtension).toHaveBeenCalledOnce();
     expect(app.registerEvent.mock.calls.map(([ref]) => ref.event)).toContain("editor-menu");
   });
 
@@ -149,7 +156,7 @@ describe("command integration", () => {
 
 describe("editor context menu", () => {
   let app: ReturnType<typeof harness>;
-  beforeEach(() => { app = harness(); });
+  beforeEach(async () => { app = harness(); await app.ready; });
 
   it("adds Copy with footnotes with the built-in copy icon for selected text", () => {
     const items = app.openMenu();

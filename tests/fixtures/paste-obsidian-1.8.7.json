@@ -1,0 +1,4618 @@
+{
+  "version": "1.8.7",
+  "fixtures": [
+    {
+      "name": "empty note",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "no conflict",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            },
+            "id": "1"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "identical definition reused",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 29,
+                "offset": 31
+              }
+            },
+            "id": "smith"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 29,
+                "offset": 31
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "numeric conflict uses maximum plus one",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            },
+            "id": "1"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 17
+              },
+              "end": {
+                "line": 3,
+                "col": 14,
+                "offset": 31
+              }
+            },
+            "id": "4"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 32
+              },
+              "end": {
+                "line": 4,
+                "col": 14,
+                "offset": 46
+              }
+            },
+            "id": "9"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 17
+              },
+              "end": {
+                "line": 3,
+                "col": 14,
+                "offset": 31
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 32
+              },
+              "end": {
+                "line": 4,
+                "col": 14,
+                "offset": 46
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "reserve incoming IDs before allocating",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            },
+            "id": "1"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "multiple numeric conflicts and a high incoming ID",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            },
+            "id": "1"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 12
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 21
+              }
+            },
+            "id": "4"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 12
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 21
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "named suffix skips occupied names",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 13,
+                "offset": 15
+              }
+            },
+            "id": "smith"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 16
+              },
+              "end": {
+                "line": 3,
+                "col": 20,
+                "offset": 36
+              }
+            },
+            "id": "smith-2"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 13,
+                "offset": 15
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 16
+              },
+              "end": {
+                "line": 3,
+                "col": 20,
+                "offset": 36
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "repeated references and case-insensitive collisions",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 13,
+                "offset": 15
+              }
+            },
+            "id": "smith"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 13,
+                "offset": 15
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "identical parent must follow its renamed child",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            },
+            "id": "a"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 18
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            },
+            "id": "b"
+          }
+        ],
+        "footnoteRefs": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            },
+            "id": "b"
+          }
+        ],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 18
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "cyclic dependency invalidation",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            },
+            "id": "a"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 18
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            },
+            "id": "b"
+          }
+        ],
+        "footnoteRefs": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            },
+            "id": "b"
+          }
+        ],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 18
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "identical duplicate destination IDs remain usable",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              }
+            },
+            "id": "a"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 14
+              },
+              "end": {
+                "line": 4,
+                "col": 10,
+                "offset": 24
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 14
+              },
+              "end": {
+                "line": 4,
+                "col": 10,
+                "offset": 24
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "different duplicate destination IDs only rename incoming",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              }
+            },
+            "id": "a"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 14
+              },
+              "end": {
+                "line": 4,
+                "col": 11,
+                "offset": 25
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 14
+              },
+              "end": {
+                "line": 4,
+                "col": 11,
+                "offset": 25
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "unrelated duplicate destination IDs do not block paste",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            },
+            "id": "a"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 12
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 21
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 12
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 21
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "insert before the chosen block",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 13
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 13
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "nearest block above moves final caret",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            },
+            "id": "up"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 64
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 77
+              }
+            },
+            "id": "down"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            }
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 13
+              },
+              "end": {
+                "line": 4,
+                "col": 49,
+                "offset": 62
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 64
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 77
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "nearest block below",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            },
+            "id": "up"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 64
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 77
+              }
+            },
+            "id": "down"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            }
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 11
+              },
+              "end": {
+                "line": 2,
+                "col": 49,
+                "offset": 60
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 64
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 77
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "next chooses the lower block even when upper is nearer",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            },
+            "id": "up"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 64
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 77
+              }
+            },
+            "id": "down"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            }
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 13
+              },
+              "end": {
+                "line": 4,
+                "col": 49,
+                "offset": 62
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 64
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 77
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "next with no later block falls back to EOF",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            },
+            "id": "up"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            }
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 11
+              },
+              "end": {
+                "line": 2,
+                "col": 5,
+                "offset": 16
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "explicit EOF ignores before setting",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 13
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 13
+              }
+            }
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 15
+              },
+              "end": {
+                "line": 4,
+                "col": 15,
+                "offset": 30
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "replace nonempty selection",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 22
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 36
+              }
+            },
+            "id": "1"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 20,
+                "offset": 20
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 22
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 36
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "replacement and definition insertion meet at EOF",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "caret at EOF without a terminal newline",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 7,
+                "offset": 7
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "multiline and multiple paragraphs retain indentation",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "native lazy continuation is supported",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "CRLF source and clipboard",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 4
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 13
+              }
+            },
+            "id": "1"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 4
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 13
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "definitions scattered between body paragraphs",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "first reference order is not numeric order",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            },
+            "id": "1"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "code references and definitions stay literal",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            },
+            "id": "1"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing definition is ordinary paste",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 12,
+                "offset": 12
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "plain text does not need footnote processing",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 20,
+                "offset": 20
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty clipboard does not delete a selection",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 17,
+                "offset": 17
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "duplicate clipboard definitions cancel without changing the note",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "container definitions cancel without changing the note",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "selection inside an existing definition cancels",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 10
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 25
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 4,
+                "offset": 4
+              },
+              "end": {
+                "line": 0,
+                "col": 8,
+                "offset": 8
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 8,
+                "offset": 8
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 10
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 25
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 15,
+                "offset": 25
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 25
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 15,
+                "offset": 25
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 25
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste inside code cancels footnote processing",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "code",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 2,
+                "col": 3,
+                "offset": 12
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "cannot put separated definitions into an unclosed fence",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "code",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 3,
+                "col": 4,
+                "offset": 14
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "definitions-only clipboard leaves caret at body position",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 5,
+                "offset": 5
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "numeric allocation exceeds Number safe integer",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 24,
+                "offset": 26
+              }
+            },
+            "id": "9007199254740993"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 24,
+                "offset": 26
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "non-ASCII labels",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              }
+            },
+            "id": "来源"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ordinary Obsidian syntax does not force fallback",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "unresolved destination IDs are reserved",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 16
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 25
+              }
+            },
+            "id": "1"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 16
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 25
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "definition insertion at the start of a replacement",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 11,
+                "offset": 11
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 11,
+                "offset": 11
+              }
+            }
+          },
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 13
+              },
+              "end": {
+                "line": 2,
+                "col": 7,
+                "offset": 20
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "equality normalizes line endings and outer whitespace only",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 3,
+                "col": 10,
+                "offset": 24
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 3,
+                "col": 10,
+                "offset": 24
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "reuse a previous numeric allocation",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            },
+            "id": "1"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 13
+              },
+              "end": {
+                "line": 4,
+                "col": 9,
+                "offset": 22
+              }
+            },
+            "id": "2"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 13
+              },
+              "end": {
+                "line": 4,
+                "col": 9,
+                "offset": 22
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "reuse a previous named allocation",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 13,
+                "offset": 15
+              }
+            },
+            "id": "smith"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 17
+              },
+              "end": {
+                "line": 4,
+                "col": 15,
+                "offset": 32
+              }
+            },
+            "id": "smith-2"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 13,
+                "offset": 15
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 4,
+                "col": 0,
+                "offset": 17
+              },
+              "end": {
+                "line": 4,
+                "col": 15,
+                "offset": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "reuse a previous cyclic allocation",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            },
+            "id": "a"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 18
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            },
+            "id": "b"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 5,
+                "col": 0,
+                "offset": 29
+              },
+              "end": {
+                "line": 5,
+                "col": 19,
+                "offset": 48
+              }
+            },
+            "id": "a-2"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 49
+              },
+              "end": {
+                "line": 6,
+                "col": 19,
+                "offset": 68
+              }
+            },
+            "id": "b-2"
+          }
+        ],
+        "footnoteRefs": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            },
+            "id": "b"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 5,
+                "col": 12,
+                "offset": 41
+              },
+              "end": {
+                "line": 5,
+                "col": 18,
+                "offset": 47
+              }
+            },
+            "id": "b-2"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 12,
+                "offset": 61
+              },
+              "end": {
+                "line": 6,
+                "col": 18,
+                "offset": 67
+              }
+            },
+            "id": "a-2"
+          }
+        ],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 18
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 5,
+                "col": 0,
+                "offset": 29
+              },
+              "end": {
+                "line": 5,
+                "col": 19,
+                "offset": 48
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 49
+              },
+              "end": {
+                "line": 6,
+                "col": 19,
+                "offset": 68
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 19,
+                "offset": 68
+              },
+              "end": {
+                "line": 6,
+                "col": 19,
+                "offset": 68
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 19,
+                "offset": 68
+              },
+              "end": {
+                "line": 6,
+                "col": 19,
+                "offset": 68
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "never reuse a parent with a different dependency",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            },
+            "id": "a"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 18
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            },
+            "id": "b"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 5,
+                "col": 0,
+                "offset": 29
+              },
+              "end": {
+                "line": 5,
+                "col": 19,
+                "offset": 48
+              }
+            },
+            "id": "a-2"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 49
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 62
+              }
+            },
+            "id": "b-2"
+          }
+        ],
+        "footnoteRefs": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            },
+            "id": "b"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 5,
+                "col": 12,
+                "offset": 41
+              },
+              "end": {
+                "line": 5,
+                "col": 18,
+                "offset": 47
+              }
+            },
+            "id": "b-2"
+          }
+        ],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 15,
+                "offset": 17
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 3,
+                "col": 0,
+                "offset": 18
+              },
+              "end": {
+                "line": 3,
+                "col": 9,
+                "offset": 27
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 5,
+                "col": 0,
+                "offset": 29
+              },
+              "end": {
+                "line": 5,
+                "col": 19,
+                "offset": 48
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 0,
+                "offset": 49
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 62
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 13,
+                "offset": 62
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 62
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 6,
+                "col": 13,
+                "offset": 62
+              },
+              "end": {
+                "line": 6,
+                "col": 13,
+                "offset": 62
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "nonconflicting IDs are preserved even when content exists under another ID",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              }
+            },
+            "id": "2"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 10,
+                "offset": 12
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "footnote label case does not duplicate identical content",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            },
+            "id": "smith"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 16
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "extracting definitions preserves the next body indentation",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "comment delimiters in inline code are literal",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "dollar signs in frontmatter do not open math blocks",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "identical definitions-only clipboard cannot delete the selected body",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 11
+              },
+              "end": {
+                "line": 2,
+                "col": 7,
+                "offset": 18
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 11
+              },
+              "end": {
+                "line": 2,
+                "col": 7,
+                "offset": 18
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "inline footnotes in the target are not stale traditional definitions",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 3,
+                "offset": 3
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            },
+            "id": "[inline0"
+          },
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 12
+              },
+              "end": {
+                "line": 2,
+                "col": 7,
+                "offset": 19
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 10,
+                "offset": 10
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 12
+              },
+              "end": {
+                "line": 2,
+                "col": 7,
+                "offset": 19
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 7,
+                "offset": 19
+              },
+              "end": {
+                "line": 2,
+                "col": 7,
+                "offset": 19
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 7,
+                "offset": 19
+              },
+              "end": {
+                "line": 2,
+                "col": 7,
+                "offset": 19
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into inline code is cancelled",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 16
+              },
+              "end": {
+                "line": 2,
+                "col": 7,
+                "offset": 23
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 16
+              },
+              "end": {
+                "line": 2,
+                "col": 7,
+                "offset": 23
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "replacing a full sentence containing inline code is allowed",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 20
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 29
+              }
+            },
+            "id": "1"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 18,
+                "offset": 18
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 20
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 29
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "unclosed comment in the destination cannot absorb new definitions",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 5,
+                "offset": 5
+              }
+            }
+          },
+          {
+            "type": "comment",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 7
+              },
+              "end": {
+                "line": 3,
+                "col": 6,
+                "offset": 16
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "unclosed comment in the clipboard is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "unclosed math in the destination cannot absorb new definitions",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 5,
+                "offset": 5
+              }
+            }
+          },
+          {
+            "type": "math",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 7
+              },
+              "end": {
+                "line": 3,
+                "col": 1,
+                "offset": 11
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "unclosed math in the clipboard is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "unclosed HTML comment in the destination cannot absorb new definitions",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 5,
+                "offset": 5
+              }
+            }
+          },
+          {
+            "type": "html",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 7
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 18
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "unclosed HTML comment in the clipboard is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "unclosed raw HTML in the destination cannot absorb new definitions",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 5,
+                "offset": 5
+              }
+            }
+          },
+          {
+            "type": "html",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 7
+              },
+              "end": {
+                "line": 2,
+                "col": 14,
+                "offset": 21
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "unclosed raw HTML in the clipboard is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "unclosed invalid closing fence in the destination cannot absorb new definitions",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 5,
+                "offset": 5
+              }
+            }
+          },
+          {
+            "type": "code",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 7
+              },
+              "end": {
+                "line": 3,
+                "col": 7,
+                "offset": 21
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "unclosed invalid closing fence in the clipboard is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "paste into inline math is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 4,
+                "offset": 4
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into an inline comment is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 23,
+                "offset": 23
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into a wikilink is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 8,
+                "offset": 8
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into an inline footnote is cancelled",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 7,
+                "offset": 7
+              },
+              "end": {
+                "line": 0,
+                "col": 13,
+                "offset": 13
+              }
+            },
+            "id": "[inline0"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              },
+              "end": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              },
+              "end": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into a Markdown link destination is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 32,
+                "offset": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into an image label is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 17,
+                "offset": 17
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into an autolink is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 26,
+                "offset": 26
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into an HTML attribute is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 31,
+                "offset": 31
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into a reference link definition is cancelled",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "definition",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 31,
+                "offset": 31
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "replacing a complete link remains a normal footnote paste",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 26,
+                "offset": 26
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "replacing complete inline math remains a normal footnote paste",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 3,
+                "offset": 3
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste immediately after a complete link remains allowed",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 26,
+                "offset": 26
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "an unclosed inline comment cannot absorb appended definitions",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "paste into a Markdown link label preserves footnote references",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 27,
+                "offset": 27
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "a preceding escape cannot hide the first pasted reference",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 1,
+                "offset": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "a preceding escaped backslash preserves the pasted reference",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 2,
+                "offset": 2
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "indentation with spaces cannot turn the pasted body into code",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "indentation with a tab cannot turn the pasted body into code",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "indentation with a blank line after a paragraph cannot turn the pasted body into code",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 9,
+                "offset": 9
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "pasting into a list continuation keeps the reference visible",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "list",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 1,
+                "col": 4,
+                "offset": 11
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "pasting into a lazy paragraph continuation keeps the reference visible",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 1,
+                "col": 4,
+                "offset": 14
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "pasting into a quote keeps the reference visible",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "blockquote",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 2,
+                "offset": 2
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "joined backticks cannot hide existing definitions",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 4
+              },
+              "end": {
+                "line": 2,
+                "col": 16,
+                "offset": 20
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 2,
+                "offset": 2
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 4
+              },
+              "end": {
+                "line": 2,
+                "col": 16,
+                "offset": 20
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "joined tildes cannot hide existing definitions",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 4
+              },
+              "end": {
+                "line": 2,
+                "col": 16,
+                "offset": 20
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 2,
+                "offset": 2
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 4
+              },
+              "end": {
+                "line": 2,
+                "col": 16,
+                "offset": 20
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "joined inline code cannot hide the incoming reference",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 1,
+                "offset": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "joined inline code cannot hide an existing reference",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 12
+              },
+              "end": {
+                "line": 2,
+                "col": 16,
+                "offset": 28
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 4,
+                "offset": 4
+              },
+              "end": {
+                "line": 0,
+                "col": 10,
+                "offset": 10
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 10,
+                "offset": 10
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 12
+              },
+              "end": {
+                "line": 2,
+                "col": 16,
+                "offset": 28
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 16,
+                "offset": 28
+              },
+              "end": {
+                "line": 2,
+                "col": 16,
+                "offset": 28
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 16,
+                "offset": 28
+              },
+              "end": {
+                "line": 2,
+                "col": 16,
+                "offset": 28
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "a following colon cannot create a second definition",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 15,
+                "offset": 15
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "joined inline math cannot hide the pasted reference",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 1,
+                "offset": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "replacement cannot remove separation before an existing definition",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 7,
+                "offset": 7
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "inserting definitions before a block restores replacement separation",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 7,
+                "offset": 7
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "replacement preserving existing separation remains allowed",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 7,
+                "offset": 7
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "removing a middle definition keeps body paragraphs separate",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "middle definition paragraph separation preserves CRLF",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "inline code brackets cannot end an inline footnote early",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "inline footnote guard skips multi-backtick code brackets",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "inline code brackets do not expose the inside of a target inline footnote",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 6,
+                "offset": 6
+              },
+              "end": {
+                "line": 0,
+                "col": 22,
+                "offset": 22
+              }
+            },
+            "id": "[inline0"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 23,
+                "offset": 23
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 23,
+                "offset": 23
+              },
+              "end": {
+                "line": 0,
+                "col": 23,
+                "offset": 23
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 23,
+                "offset": 23
+              },
+              "end": {
+                "line": 0,
+                "col": 23,
+                "offset": 23
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "a code bracket outside inline footnotes stays literal",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "dollar prices around a footnote remain ordinary text",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "dollar prices do not prevent incoming conflict renaming",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            },
+            "id": "a"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 2
+              },
+              "end": {
+                "line": 2,
+                "col": 9,
+                "offset": 11
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "inline math may span a soft line break",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "inline math cannot span a blank paragraph",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "valid inline math outside references stays unchanged",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "dollar delimiter with opening whitespace is ordinary text",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "dollar delimiter with closing whitespace is ordinary text",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "dollar delimiter with following digit is ordinary text",
+      "cache": {
+        "footnotes": [],
+        "footnoteRefs": [],
+        "sections": []
+      }
+    },
+    {
+      "name": "one newline cannot leave an existing definition inside a paragraph",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 7,
+                "offset": 7
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "two newlines retain an existing definition after replacement",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            },
+            "id": "old"
+          }
+        ],
+        "footnoteRefs": [],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 7,
+                "offset": 7
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 9
+              },
+              "end": {
+                "line": 2,
+                "col": 11,
+                "offset": 20
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "an unresolved clipboard reference may use an existing target definition",
+      "cache": {
+        "footnotes": [
+          {
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 16
+              },
+              "end": {
+                "line": 2,
+                "col": 21,
+                "offset": 37
+              }
+            },
+            "id": "existing"
+          }
+        ],
+        "footnoteRefs": [
+          {
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 3,
+                "offset": 3
+              },
+              "end": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              }
+            },
+            "id": "existing"
+          }
+        ],
+        "sections": [
+          {
+            "type": "paragraph",
+            "position": {
+              "start": {
+                "line": 0,
+                "col": 0,
+                "offset": 0
+              },
+              "end": {
+                "line": 0,
+                "col": 14,
+                "offset": 14
+              }
+            }
+          },
+          {
+            "type": "footnoteDefinition",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 0,
+                "offset": 16
+              },
+              "end": {
+                "line": 2,
+                "col": 21,
+                "offset": 37
+              }
+            }
+          },
+          {
+            "type": "text",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 21,
+                "offset": 37
+              },
+              "end": {
+                "line": 2,
+                "col": 21,
+                "offset": 37
+              }
+            }
+          },
+          {
+            "type": "element",
+            "position": {
+              "start": {
+                "line": 2,
+                "col": 21,
+                "offset": 37
+              },
+              "end": {
+                "line": 2,
+                "col": 21,
+                "offset": 37
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "id": "copy-with-footnotes",
   "name": "Copy with Footnotes",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "minAppVersion": "1.8.7",
   "description": "Copy selected Markdown together with its referenced footnote definitions.",
   "author": "Systina12",

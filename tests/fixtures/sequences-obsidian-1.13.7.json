@@ -1,0 +1,5721 @@
+{
+  "version": "1.13.7",
+  "fixtures": [
+    {
+      "name": "repeated exact reuse",
+      "steps": [
+        {
+          "source": "\n\n[^a]: Same",
+          "caret": 0,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 12
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [],
+            "sections": [
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 12
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a]\n\n[^a]: Same",
+          "caret": 9,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 11
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 21
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 11
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 21
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 21
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 21
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 21
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 21
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a]Hello[^a]\n\n[^a]: Same",
+          "caret": 18,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 30
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 30
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 30
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 30
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 30
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 30
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a]Hello[^a]Hello[^a]\n\n[^a]: Same",
+          "caret": 27,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 29
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 39
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 23,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 29
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 39
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 39
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 39
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 39
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 39
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a]Hello[^a]Hello[^a]Hello[^a]\n\n[^a]: Same",
+          "caret": 36,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 38
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 48
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 23,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 32,
+                    "offset": 32
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 36,
+                    "offset": 36
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 36,
+                    "offset": 36
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 38
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 48
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 48
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 48
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 48
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 48
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "new definition reused on subsequent pastes",
+      "steps": [
+        {
+          "source": "",
+          "caret": 0,
+          "cache": {
+            "footnotes": [],
+            "footnoteRefs": [],
+            "sections": []
+          }
+        },
+        {
+          "source": "Hello[^a]\n\n[^a]: A",
+          "caret": 9,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 11
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 7,
+                    "offset": 18
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 11
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 7,
+                    "offset": 18
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 18
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 18
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 18
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 18
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a]Hello[^a]\n\n[^a]: A",
+          "caret": 18,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 7,
+                    "offset": 27
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 7,
+                    "offset": 27
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 27
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 27
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a]Hello[^a]Hello[^a]\n\n[^a]: A",
+          "caret": 27,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 29
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 7,
+                    "offset": 36
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 23,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 29
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 7,
+                    "offset": 36
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 36
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 36
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 36
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 36
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a]Hello[^a]Hello[^a]Hello[^a]\n\n[^a]: A",
+          "caret": 36,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 38
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 7,
+                    "offset": 45
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 23,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 32,
+                    "offset": 32
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 36,
+                    "offset": 36
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 36,
+                    "offset": 36
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 38
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 7,
+                    "offset": 45
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 45
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 45
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 45
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 45
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "numeric rename reused on subsequent pastes",
+      "steps": [
+        {
+          "source": "\n\n[^1]: Old",
+          "caret": 0,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 11
+                  }
+                },
+                "id": "1"
+              }
+            ],
+            "footnoteRefs": [],
+            "sections": [
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 11
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^2]\n\n[^1]: Old\n\n[^2]: New",
+          "caret": 9,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 11
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 20
+                  }
+                },
+                "id": "1"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 22
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 31
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 11
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 20
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 22
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 31
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 31
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 31
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 31
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 31
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^2]Hello[^2]\n\n[^1]: Old\n\n[^2]: New",
+          "caret": 18,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 29
+                  }
+                },
+                "id": "1"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 31
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 40
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 29
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 31
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 40
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 40
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 40
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 40
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 40
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^2]Hello[^2]Hello[^2]\n\n[^1]: Old\n\n[^2]: New",
+          "caret": 27,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 29
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 38
+                  }
+                },
+                "id": "1"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 40
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 49
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 23,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 29
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 38
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 40
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 49
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 49
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 49
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 49
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 49
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^2]Hello[^2]Hello[^2]Hello[^2]\n\n[^1]: Old\n\n[^2]: New",
+          "caret": 36,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 38
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 47
+                  }
+                },
+                "id": "1"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 49
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 58
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 9,
+                    "offset": 9
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 18,
+                    "offset": 18
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 23,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 32,
+                    "offset": 32
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 36,
+                    "offset": 36
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 36,
+                    "offset": 36
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 38
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 47
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 49
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 58
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 58
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 58
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 58
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 58
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "named rename reused on subsequent pastes",
+      "steps": [
+        {
+          "source": "\n\n[^a]: Old",
+          "caret": 0,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 11
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [],
+            "sections": [
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 11
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a-2]\n\n[^a]: Old\n\n[^a-2]: New",
+          "caret": 11,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 13
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 22
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 24
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 11,
+                    "offset": 35
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 11,
+                    "offset": 11
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 11,
+                    "offset": 11
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 13
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 22
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 24
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 11,
+                    "offset": 35
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 35
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 35
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 35
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 35
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a-2]Hello[^a-2]\n\n[^a]: Old\n\n[^a-2]: New",
+          "caret": 22,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 24
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 33
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 35
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 11,
+                    "offset": 46
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 11,
+                    "offset": 11
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 16,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 22,
+                    "offset": 22
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 22,
+                    "offset": 22
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 24
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 33
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 35
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 11,
+                    "offset": 46
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 46
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 46
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 46
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 46
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a-2]Hello[^a-2]Hello[^a-2]\n\n[^a]: Old\n\n[^a-2]: New",
+          "caret": 33,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 35
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 44
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 46
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 11,
+                    "offset": 57
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 11,
+                    "offset": 11
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 16,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 22,
+                    "offset": 22
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 33,
+                    "offset": 33
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 33,
+                    "offset": 33
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 35
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 44
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 46
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 11,
+                    "offset": 57
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 57
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 57
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 57
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 57
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "Hello[^a-2]Hello[^a-2]Hello[^a-2]Hello[^a-2]\n\n[^a]: Old\n\n[^a-2]: New",
+          "caret": 44,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 46
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 55
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 57
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 11,
+                    "offset": 68
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 11,
+                    "offset": 11
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 16,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 22,
+                    "offset": 22
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 27,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 33,
+                    "offset": 33
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 38,
+                    "offset": 38
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 44,
+                    "offset": 44
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 44,
+                    "offset": 44
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 46
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 55
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 57
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 11,
+                    "offset": 68
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 68
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 68
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 68
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 68
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "cyclic rename reused on subsequent pastes",
+      "steps": [
+        {
+          "source": "\n\n[^a]: See [^b].\n[^b]: Old",
+          "caret": 0,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 17
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 18
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 27
+                  }
+                },
+                "id": "b"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 12
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 14,
+                    "offset": 16
+                  }
+                },
+                "id": "b"
+              }
+            ],
+            "sections": [
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 17
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 18
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 27
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 27
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 27
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a-2]\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: See [^a-2].",
+          "caret": 7,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 9
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 24
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 25
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 34
+                  }
+                },
+                "id": "b"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 36
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 19,
+                    "offset": 55
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 56
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 19,
+                    "offset": 75
+                  }
+                },
+                "id": "b-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 19
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 14,
+                    "offset": 23
+                  }
+                },
+                "id": "b"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 48
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 18,
+                    "offset": 54
+                  }
+                },
+                "id": "b-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 12,
+                    "offset": 68
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 18,
+                    "offset": 74
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 9
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 24
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 25
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 34
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 36
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 19,
+                    "offset": 55
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 56
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 19,
+                    "offset": 75
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 75
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 75
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 75
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 75
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a-2]A[^a-2]\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: See [^a-2].",
+          "caret": 14,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 31
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 32
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 41
+                  }
+                },
+                "id": "b"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 43
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 19,
+                    "offset": 62
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 63
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 19,
+                    "offset": 82
+                  }
+                },
+                "id": "b-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 8,
+                    "offset": 8
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 26
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 14,
+                    "offset": 30
+                  }
+                },
+                "id": "b"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 55
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 18,
+                    "offset": 61
+                  }
+                },
+                "id": "b-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 12,
+                    "offset": 75
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 18,
+                    "offset": 81
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 31
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 32
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 41
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 43
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 19,
+                    "offset": 62
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 63
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 19,
+                    "offset": 82
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 82
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 82
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 82
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 82
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a-2]A[^a-2]A[^a-2]\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: See [^a-2].",
+          "caret": 21,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 38
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 39
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 48
+                  }
+                },
+                "id": "b"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 50
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 19,
+                    "offset": 69
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 70
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 19,
+                    "offset": 89
+                  }
+                },
+                "id": "b-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 8,
+                    "offset": 8
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 15,
+                    "offset": 15
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 21,
+                    "offset": 21
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 33
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 14,
+                    "offset": 37
+                  }
+                },
+                "id": "b"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 62
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 18,
+                    "offset": 68
+                  }
+                },
+                "id": "b-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 12,
+                    "offset": 82
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 18,
+                    "offset": 88
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 21,
+                    "offset": 21
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 38
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 39
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 48
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 50
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 19,
+                    "offset": 69
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 70
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 19,
+                    "offset": 89
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 89
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 89
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 89
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 89
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a-2]A[^a-2]A[^a-2]A[^a-2]\n\n[^a]: See [^b].\n[^b]: Old\n\n[^a-2]: See [^b-2].\n[^b-2]: See [^a-2].",
+          "caret": 28,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 30
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 45
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 46
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 55
+                  }
+                },
+                "id": "b"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 57
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 19,
+                    "offset": 76
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 77
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 19,
+                    "offset": 96
+                  }
+                },
+                "id": "b-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 8,
+                    "offset": 8
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 15,
+                    "offset": 15
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 21,
+                    "offset": 21
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 22,
+                    "offset": 22
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 28,
+                    "offset": 28
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 40
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 14,
+                    "offset": 44
+                  }
+                },
+                "id": "b"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 69
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 18,
+                    "offset": 75
+                  }
+                },
+                "id": "b-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 12,
+                    "offset": 89
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 18,
+                    "offset": 95
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 28,
+                    "offset": 28
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 30
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 15,
+                    "offset": 45
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 46
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 55
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 57
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 19,
+                    "offset": 76
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 77
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 19,
+                    "offset": 96
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 96
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 96
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 96
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 96
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "identical duplicate targets remain unchanged",
+      "steps": [
+        {
+          "source": "\n\n[^a]: Same\n[^a]: Same",
+          "caret": 0,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 12
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 13
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 23
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [],
+            "sections": [
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 12
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 13
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 23
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a]\n\n[^a]: Same\n[^a]: Same",
+          "caret": 5,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 7
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 17
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 18
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 28
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 7
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 17
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 18
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 28
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 28
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 28
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 28
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 28
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a]A[^a]\n\n[^a]: Same\n[^a]: Same",
+          "caret": 10,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 12
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 22
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 33
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 6,
+                    "offset": 6
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 10,
+                    "offset": 10
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 10,
+                    "offset": 10
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 12
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 22
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 33
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 33
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 33
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 33
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 33
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a]A[^a]A[^a]\n\n[^a]: Same\n[^a]: Same",
+          "caret": 15,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 17
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 27
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 28
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 38
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 6,
+                    "offset": 6
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 10,
+                    "offset": 10
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 11,
+                    "offset": 11
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 15,
+                    "offset": 15
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 15,
+                    "offset": 15
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 17
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 27
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 28
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 38
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 38
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 38
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 38
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 38
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a]A[^a]A[^a]A[^a]\n\n[^a]: Same\n[^a]: Same",
+          "caret": 20,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 22
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 32
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 33
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 43
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 6,
+                    "offset": 6
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 10,
+                    "offset": 10
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 11,
+                    "offset": 11
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 15,
+                    "offset": 15
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 16,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 20,
+                    "offset": 20
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 20,
+                    "offset": 20
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 22
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 32
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 33
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 10,
+                    "offset": 43
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 43
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 43
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 43
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 43
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "different duplicate targets reuse one new definition",
+      "steps": [
+        {
+          "source": "\n\n[^a]: Same\n[^a]: Other",
+          "caret": 0,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 12
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 13
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 24
+                  }
+                },
+                "id": "a"
+              }
+            ],
+            "footnoteRefs": [],
+            "sections": [
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 12
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 13
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 24
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a-2]\n\n[^a]: Same\n[^a]: Other\n\n[^a-2]: Same",
+          "caret": 7,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 9
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 19
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 31
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 33
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 45
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 9
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 19
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 31
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 33
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 45
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 45
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 45
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 45
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 45
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a-2]A[^a-2]\n\n[^a]: Same\n[^a]: Other\n\n[^a-2]: Same",
+          "caret": 14,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 26
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 38
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 40
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 52
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 8,
+                    "offset": 8
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 26
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 38
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 40
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 52
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 52
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 52
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 52
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 52
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a-2]A[^a-2]A[^a-2]\n\n[^a]: Same\n[^a]: Other\n\n[^a-2]: Same",
+          "caret": 21,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 33
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 34
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 45
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 47
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 59
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 8,
+                    "offset": 8
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 15,
+                    "offset": 15
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 21,
+                    "offset": 21
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 21,
+                    "offset": 21
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 33
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 34
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 45
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 47
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 59
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 59
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 59
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 59
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 59
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^a-2]A[^a-2]A[^a-2]A[^a-2]\n\n[^a]: Same\n[^a]: Other\n\n[^a-2]: Same",
+          "caret": 28,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 30
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 40
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 41
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 52
+                  }
+                },
+                "id": "a"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 54
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 66
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 7,
+                    "offset": 7
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 8,
+                    "offset": 8
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 14,
+                    "offset": 14
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 15,
+                    "offset": 15
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 21,
+                    "offset": 21
+                  }
+                },
+                "id": "a-2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 22,
+                    "offset": 22
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 28,
+                    "offset": 28
+                  }
+                },
+                "id": "a-2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 28,
+                    "offset": 28
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 30
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 10,
+                    "offset": 40
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 41
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 11,
+                    "offset": 52
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 54
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 12,
+                    "offset": 66
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 66
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 66
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 66
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 66
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CRLF clipboard in an LF editor",
+      "steps": [
+        {
+          "source": "\n\n[^1]: Old",
+          "caret": 0,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 11
+                  }
+                },
+                "id": "1"
+              }
+            ],
+            "footnoteRefs": [],
+            "sections": [
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 0,
+                    "offset": 2
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 9,
+                    "offset": 11
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^2]\nB\n\n[^1]: Old\n\n[^2]: First\n    Second",
+          "caret": 7,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 9
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 18
+                  }
+                },
+                "id": "1"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 10,
+                    "offset": 42
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 1,
+                    "col": 1,
+                    "offset": 7
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 0,
+                    "offset": 9
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 9,
+                    "offset": 18
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 20
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 10,
+                    "offset": 42
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 42
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 42
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 42
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 42
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^2]\nBA[^2]\nB\n\n[^1]: Old\n\n[^2]: First\n    Second",
+          "caret": 14,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 25
+                  }
+                },
+                "id": "1"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 10,
+                    "offset": 49
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "col": 2,
+                    "offset": 8
+                  },
+                  "end": {
+                    "line": 1,
+                    "col": 6,
+                    "offset": 12
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 1,
+                    "offset": 14
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 4,
+                    "col": 0,
+                    "offset": 16
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 9,
+                    "offset": 25
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 27
+                  },
+                  "end": {
+                    "line": 7,
+                    "col": 10,
+                    "offset": 49
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 8,
+                    "col": 0,
+                    "offset": 49
+                  },
+                  "end": {
+                    "line": 8,
+                    "col": 0,
+                    "offset": 49
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 8,
+                    "col": 0,
+                    "offset": 49
+                  },
+                  "end": {
+                    "line": 8,
+                    "col": 0,
+                    "offset": 49
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^2]\nBA[^2]\nBA[^2]\nB\n\n[^1]: Old\n\n[^2]: First\n    Second",
+          "caret": 21,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 9,
+                    "offset": 32
+                  }
+                },
+                "id": "1"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 34
+                  },
+                  "end": {
+                    "line": 8,
+                    "col": 10,
+                    "offset": 56
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "col": 2,
+                    "offset": 8
+                  },
+                  "end": {
+                    "line": 1,
+                    "col": 6,
+                    "offset": 12
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 2,
+                    "offset": 15
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 6,
+                    "offset": 19
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 1,
+                    "offset": 21
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 5,
+                    "col": 0,
+                    "offset": 23
+                  },
+                  "end": {
+                    "line": 5,
+                    "col": 9,
+                    "offset": 32
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 7,
+                    "col": 0,
+                    "offset": 34
+                  },
+                  "end": {
+                    "line": 8,
+                    "col": 10,
+                    "offset": 56
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 9,
+                    "col": 0,
+                    "offset": 56
+                  },
+                  "end": {
+                    "line": 9,
+                    "col": 0,
+                    "offset": 56
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 9,
+                    "col": 0,
+                    "offset": 56
+                  },
+                  "end": {
+                    "line": 9,
+                    "col": 0,
+                    "offset": 56
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "source": "A[^2]\nBA[^2]\nBA[^2]\nBA[^2]\nB\n\n[^1]: Old\n\n[^2]: First\n    Second",
+          "caret": 28,
+          "cache": {
+            "footnotes": [
+              {
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 30
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 9,
+                    "offset": 39
+                  }
+                },
+                "id": "1"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 8,
+                    "col": 0,
+                    "offset": 41
+                  },
+                  "end": {
+                    "line": 9,
+                    "col": 10,
+                    "offset": 63
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "footnoteRefs": [
+              {
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 1,
+                    "offset": 1
+                  },
+                  "end": {
+                    "line": 0,
+                    "col": 5,
+                    "offset": 5
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 1,
+                    "col": 2,
+                    "offset": 8
+                  },
+                  "end": {
+                    "line": 1,
+                    "col": 6,
+                    "offset": 12
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 2,
+                    "col": 2,
+                    "offset": 15
+                  },
+                  "end": {
+                    "line": 2,
+                    "col": 6,
+                    "offset": 19
+                  }
+                },
+                "id": "2"
+              },
+              {
+                "position": {
+                  "start": {
+                    "line": 3,
+                    "col": 2,
+                    "offset": 22
+                  },
+                  "end": {
+                    "line": 3,
+                    "col": 6,
+                    "offset": 26
+                  }
+                },
+                "id": "2"
+              }
+            ],
+            "sections": [
+              {
+                "type": "paragraph",
+                "position": {
+                  "start": {
+                    "line": 0,
+                    "col": 0,
+                    "offset": 0
+                  },
+                  "end": {
+                    "line": 4,
+                    "col": 1,
+                    "offset": 28
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 6,
+                    "col": 0,
+                    "offset": 30
+                  },
+                  "end": {
+                    "line": 6,
+                    "col": 9,
+                    "offset": 39
+                  }
+                }
+              },
+              {
+                "type": "footnoteDefinition",
+                "position": {
+                  "start": {
+                    "line": 8,
+                    "col": 0,
+                    "offset": 41
+                  },
+                  "end": {
+                    "line": 9,
+                    "col": 10,
+                    "offset": 63
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "position": {
+                  "start": {
+                    "line": 10,
+                    "col": 0,
+                    "offset": 63
+                  },
+                  "end": {
+                    "line": 10,
+                    "col": 0,
+                    "offset": 63
+                  }
+                }
+              },
+              {
+                "type": "element",
+                "position": {
+                  "start": {
+                    "line": 10,
+                    "col": 0,
+                    "offset": 63
+                  },
+                  "end": {
+                    "line": 10,
+                    "col": 0,
+                    "offset": 63
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
