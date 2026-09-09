@@ -48,7 +48,7 @@ export function applyEdits(source: string, changes: readonly TextEdit[]): string
 // Reservation is conservative: a literal-looking ID must never accidentally acquire
 // an incoming definition. These matches do not identify definitions or edit spans.
 export function reserveIds(source: string): Set<string> {
-  return new Set([...source.matchAll(/\[\^([^\s\[\]\\]+)\]/g)].map((match) => match[1].toLowerCase()));
+  return new Set([...source.matchAll(/\[\^([^\s[\]\\]+)\]/g)].map((match) => match[1].toLowerCase()));
 }
 
 export function parseClipboardFootnotes(source: string): ClipboardFootnotes {
@@ -83,7 +83,7 @@ export function parseClipboardFootnotes(source: string): ClipboardFootnotes {
         throw new FootnoteError("Footnotes inside unsupported Markdown syntax");
       }
       const raw = source.slice(start, end);
-      const match = /^\[\^([^\s\[\]\\]+)\]/.exec(raw);
+      const match = /^\[\^([^\s[\]\\]+)\]/.exec(raw);
       if (!match) throw new FootnoteError("Unsupported footnote label");
       const name = match[1];
       const id = name.toLowerCase();
@@ -104,7 +104,7 @@ export function parseClipboardFootnotes(source: string): ClipboardFootnotes {
         (owner?.references ?? bodyReferences).push(reference);
       }
     } else if ((node.type === "code" || node.type === "html") && parent === "root") {
-      const raw = source.slice(node.position!.start.offset!, node.position!.end.offset!);
+      const raw = source.slice(node.position!.start.offset, node.position!.end.offset);
       unclosedBlock ||= blockIsOpen(raw, node.type);
     }
     if ("children" in node) {

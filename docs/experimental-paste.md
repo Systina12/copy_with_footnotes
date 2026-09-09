@@ -1,12 +1,12 @@
 # Experimental Paste with Footnotes
 
-This optional feature is included in version 0.2.0 and defaults to off.
+This optional feature is available from version 0.2.0 and defaults to off.
 Versions 0.1.0 and 0.1.1 provide Copy only.
 
 ## Use
 
 Open **Settings → Copy with Footnotes → Experimental**, then turn on
-**Enable Paste with Footnotes**. It defaults to off. Enabling it adds:
+**Enable paste with footnotes**. It defaults to off. Enabling it adds:
 
 - **Paste clipboard** to the Command Palette.
 - **Paste with footnotes** to the active Markdown editor's context menu.
@@ -14,6 +14,9 @@ Open **Settings → Copy with Footnotes → Experimental**, then turn on
 Both entries share the same implementation. Source mode and Live Preview are
 supported, with one caret or selection. Ctrl+V and the native Paste action keep
 their usual behavior. A shortcut can be assigned to the command.
+
+From version 0.2.1, these options also appear in Obsidian 1.13+ settings search.
+The original settings page remains available on Obsidian 1.8.7 through 1.12.
 
 ## Conflicts and placement
 

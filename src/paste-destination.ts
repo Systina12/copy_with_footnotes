@@ -23,7 +23,7 @@ export function collectDestinationFootnotes(source: string, cache: FootnoteMetad
     if (!validSpan(source, span)) throw new FootnoteError("Destination footnote positions are outdated");
     if (source.slice(span.start - 2, span.start) === "^[" && source[span.end] === "]") continue;
     const text = source.slice(span.start, span.end);
-    const marker = /^ {0,3}\[\^([^\s\[\]\\]+)\]:/.exec(text);
+    const marker = /^ {0,3}\[\^([^\s[\]\\]+)\]:/.exec(text);
     // A content-only inline footnote range must actually be inside ^[...].
     // Otherwise a marker that moved is stale metadata, not an inline footnote.
     if (!marker) {
@@ -102,7 +102,7 @@ export function collectDestinationFootnotes(source: string, cache: FootnoteMetad
     }
   }
   // Detect incomplete/stale caches without using regex matches as definition ranges.
-  for (const match of source.matchAll(/^ {0,3}\[\^([^\s\[\]\\]+)\]:/gm)) {
+  for (const match of source.matchAll(/^ {0,3}\[\^([^\s[\]\\]+)\]:/gm)) {
     const position = match.index;
     if (definitions.some((definition) => position >= definition.start && position < definition.end) ||
         literals.some((span) => position >= span.start && position < span.end) ||

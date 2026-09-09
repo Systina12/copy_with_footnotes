@@ -1,25 +1,37 @@
 # Verification
 
-This document covers Copy with Footnotes 0.2.0, including optional experimental
-Paste. Versions 0.1.0 and 0.1.1 contain Copy only; their tags and release assets
-remain unchanged.
+This document covers Copy with Footnotes 0.2.1, including optional experimental
+Paste. Versions 0.1.0 and 0.1.1 contain Copy only.
 
 ## Results
 
-Latest validation ran on 2026-09-09 after fixing the four follow-up review findings.
+Latest validation ran on 2026-09-09 for the scanner follow-up release, 0.2.1.
 
 | Check | Result |
 | --- | --- |
 | `npm ci` and dependency audit | Clean install succeeded; zero known vulnerabilities. |
-| `npm test` | 527/527 tests in six files passed. |
+| `npm run lint` | Official Obsidian recommended rules and type-aware checks passed with zero warnings. |
+| `npm test` | 531/531 tests in six files passed. |
 | `npm run build` | TypeScript check and production build passed. |
-| Production `main.js` | 119,890 bytes, including bundled dependency licenses. |
+| Production `main.js` | 120,767 bytes, including bundled dependency licenses. |
 | Official Obsidian 1.8.7 worker | 38 Copy, 114 Paste, 8 sequences / 40 consecutive pastes passed. |
 | Official Obsidian 1.13.7 worker | Same cases and sequences passed. |
-| Installed Obsidian 1.13.7 | 320 native scenario checks passed across Source and Live Preview. |
+| Installed Obsidian 1.13.7 | 14 targeted native checks passed, including settings search and main/popout editors. |
 
-Each native editor mode passed 114 Paste scenarios, eight five-paste sequences,
-and 38 Copy scenarios. The native harness invoked registered commands through
+The 0.2.1 native checks verified all three settings are searchable, search results
+open the correct settings page, toggling Paste updates commands and dependent
+controls, and settings persist across a plugin reload. Copy, Paste, caret placement,
+Undo, and Redo passed in both Source mode and Live Preview, in the main window
+and a separate popout. All four observed metadata wait timers were cleared.
+The test vault's original settings, clipboard, and active tab were restored.
+
+Regression tests also cover the legacy settings UI without any 1.13 APIs,
+normalization of declarative settings values, and cancellation of a pending
+Paste when its setting is disabled.
+
+The broader 0.2.0 native baseline passed 320 scenarios. Each editor mode passed
+114 Paste scenarios, eight five-paste sequences, and 38 Copy scenarios.
+That harness invoked registered commands through
 Obsidian's official CLI and used the actual editor, clipboard, metadata,
 notices, and Undo/Redo. It verified cancellation or one-step restoration of
 text and selection, stable carets, and success feedback during repeated pastes.
@@ -32,6 +44,7 @@ See the [review report](review-2026-09-09.md) for findings and evidence.
 
 ```sh
 npm ci
+npm run lint
 npm test
 npm run build
 npm run test:metadata -- /path/to/worker-1.8.7.js 1.8.7
@@ -47,9 +60,12 @@ definition content, including existing duplicates.
 
 Use `--write` after the version only to intentionally regenerate fixtures.
 Normal tests are offline and do not download or execute Obsidian binaries.
-TypeScript checks include production and test code. No separate lint tool is
-configured. Temporary verification files belong in the ignored `.verification/`
-directory.
+TypeScript checks include production and test code. ESLint checks `src/` using
+the official Obsidian recommended rules, with project type information and a
+zero-warning threshold. The `no-unsafe-*` rules remain enabled; dependency types
+must resolve rather than being hidden with casts or disabled rules. GitHub Actions
+runs lint, tests, and the production build for pushes and pull requests.
+Temporary verification files belong in the ignored `.verification/` directory.
 
 Release preparation upgraded the development test runner to Vitest 4.1.11,
 which fixes GHSA-82fw-gwwq-j7x9. Use a supported LTS Node.js release for the
@@ -73,6 +89,9 @@ and `footnoteRefs` in 1.8.7. The implementation uses:
 - Registered `editor-change`, `editor-menu`, and vault `modify` events.
 - Command registration/removal, settings persistence, `PluginSettingTab`,
   `registerEditorExtension()`, and `Notice`.
+- Declarative setting definitions and value persistence on Obsidian 1.13+,
+  with `display()` retained for the minimum supported version, 1.8.7.
+- Browser-window timers for metadata waits, created and cleared on the same window.
 - `navigator.clipboard.readText()` and `writeText()`.
 - CodeMirror's public transaction extension and `isolateHistory` annotation.
 

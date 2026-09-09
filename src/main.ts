@@ -134,7 +134,7 @@ export default class CopyWithFootnotesPlugin extends Plugin {
     if (current()) return current();
     return new Promise((resolve) => {
       const finish = (value: IndexedNote | null) => {
-        clearTimeout(timer);
+        window.clearTimeout(timer);
         this.cacheWaiters.delete(check);
         resolve(value);
       };
@@ -142,7 +142,7 @@ export default class CopyWithFootnotesPlugin extends Plugin {
         const indexed = current();
         if (indexed || !isCurrent()) finish(indexed);
       };
-      const timer = setTimeout(() => finish(null), 3000);
+      const timer = window.setTimeout(() => finish(null), 3000);
       this.cacheWaiters.add(check);
       check();
     });

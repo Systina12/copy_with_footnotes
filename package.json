@@ -1,11 +1,12 @@
 {
   "name": "copy-with-footnotes",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Copy selected Markdown together with its referenced footnote definitions.",
   "main": "main.js",
   "type": "module",
   "scripts": {
     "dev": "node esbuild.config.mjs",
+    "lint": "eslint src --max-warnings 0",
     "typecheck": "tsc --noEmit --skipLibCheck",
     "build": "npm run typecheck && node esbuild.config.mjs production",
     "test": "vitest run",
@@ -21,8 +22,11 @@
     "@codemirror/state": "6.5.0",
     "@types/node": "^22.15.17",
     "esbuild": "^0.25.5",
+    "eslint": "^9.39.5",
+    "eslint-plugin-obsidianmd": "^0.4.2",
     "obsidian": "1.13.1",
     "typescript": "^5.8.3",
+    "typescript-eslint": "^8.70.0",
     "vitest": "^4.1.11"
   },
   "dependencies": {

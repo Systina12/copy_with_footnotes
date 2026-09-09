@@ -37,7 +37,7 @@ Requires Obsidian 1.8.7 or later, in Source mode or Live Preview.
 
 ## Experimental Paste
 
-In the plugin settings, turn on **Enable Paste with Footnotes**. Use
+In the plugin settings, turn on **Enable paste with footnotes**. Use
 **Paste clipboard** in the Command Palette or **Paste with footnotes** in the
 editor menu. Choose the nearest block, the next block, or the end of the note,
 and insert definitions before or after that block. Existing definitions are
@@ -45,7 +45,7 @@ reused or incoming IDs are renamed when needed. [Details](docs/experimental-past
 
 ## Local Installation
 
-Use a supported LTS Node.js release. Run `npm ci`, `npm test`, and
+Use a supported LTS Node.js release. Run `npm ci`, `npm run lint`, `npm test`, and
 `npm run build`. Put `main.js` and
 `manifest.json` in `<vault>/.obsidian/plugins/copy-with-footnotes/`, then enable
 Copy with Footnotes in Community plugins. No CSS file is needed.

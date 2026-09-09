@@ -44,7 +44,7 @@ function syntax(source: string, ids: ReadonlySet<string>) {
     } else if (node.type === "footnoteDefinition") {
       definitions.push({ start, end, label: start + raw.indexOf("[^") + 2, parent,
         interruptsParagraph: parent === "root" && previous?.type === "paragraph" &&
-          !/\r?\n[\t ]*\r?\n/.test(source.slice(previous.position!.end.offset!, start)) });
+          !/\r?\n[\t ]*\r?\n/.test(source.slice(previous.position!.end.offset, start)) });
     }
     if ("children" in node) {
       for (let i = node.children.length - 1; i >= 0; i--) {

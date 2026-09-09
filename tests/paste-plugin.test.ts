@@ -2,7 +2,7 @@ import { buildSync } from "esbuild";
 import { runInNewContext } from "node:vm";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { CachedMetadata, Command, EditorPosition, EditorTransaction } from "obsidian";
-import type { FootnoteSettings } from "../src/settings";
+import type { FootnoteSettings, FootnoteSettingTab } from "../src/settings";
 import * as cmState from "@codemirror/state";
 import * as cmCommands from "@codemirror/commands";
 import { PASTE_ORIGIN } from "../src/paste-history";
@@ -19,6 +19,23 @@ interface RuntimePlugin {
   updateSettings(update: Partial<FootnoteSettings>): Promise<void>;
   pasteClipboard(editor: unknown, info: unknown): Promise<void>;
   settings: FootnoteSettings;
+}
+
+class SettingControl<Value> {
+  value?: Value;
+  disabled = false;
+  options: Record<string, string> = {};
+  change: (value: Value) => unknown = () => undefined;
+  setValue(value: Value) { this.value = value; return this; }
+  setDisabled(disabled: boolean) { this.disabled = disabled; return this; }
+  addOption(value: string, name: string) { this.options[value] = name; return this; }
+  onChange(callback: (value: Value) => unknown) { this.change = callback; return this; }
+}
+
+interface LegacySettingRow {
+  name: string;
+  toggle?: SettingControl<boolean>;
+  dropdown?: SettingControl<string>;
 }
 
 async function harness(saved: unknown = { enablePaste: true }) {
@@ -55,7 +72,24 @@ async function harness(saved: unknown = { enablePaste: true }) {
   const cachedRead = vi.fn(async () => state.savedSource);
   const saveData = vi.fn().mockResolvedValue(undefined);
   const error = vi.fn();
-  const addSettingTab = vi.fn();
+  const addSettingTab = vi.fn<(tab: FootnoteSettingTab) => void>();
+  const renderedSettings: LegacySettingRow[] = [];
+  // Model the pre-1.13 API: no declarative rendering or refresh methods exist.
+  class PluginSettingTab {
+    containerEl = { empty: () => { renderedSettings.length = 0; } };
+  }
+  class Setting {
+    row: LegacySettingRow = { name: "" };
+    constructor() { renderedSettings.push(this.row); }
+    setName(name: string) { this.row.name = name; return this; }
+    setHeading() { return this; }
+    addToggle(configure: (control: SettingControl<boolean>) => void) {
+      this.row.toggle = new SettingControl<boolean>(); configure(this.row.toggle); return this;
+    }
+    addDropdown(configure: (control: SettingControl<string>) => void) {
+      this.row.dropdown = new SettingControl<string>(); configure(this.row.dropdown); return this;
+    }
+  }
   class Plugin {
     app = { workspace: { on, getActiveViewOfType: () => state.active ? view : null },
       metadataCache: { on, getFileCache }, vault: { on, cachedRead } };
@@ -68,13 +102,14 @@ async function harness(saved: unknown = { enablePaste: true }) {
     addSettingTab = addSettingTab;
   }
   const module = { exports: {} as { default: new () => RuntimePlugin } };
-  runInNewContext(compiled, { module, navigator: { clipboard }, console: { error }, setTimeout, clearTimeout,
-    require: (name: string) => name === "@codemirror/state" ? cmState : name === "@codemirror/commands" ? cmCommands : ({ Plugin, TFile, MarkdownView, PluginSettingTab: class {},
+  runInNewContext(compiled, { module, navigator: { clipboard }, console: { error }, window: { setTimeout, clearTimeout },
+    require: (name: string) => name === "@codemirror/state" ? cmState : name === "@codemirror/commands" ? cmCommands : ({ Plugin, TFile, MarkdownView, PluginSettingTab, Setting,
       Notice: class { constructor(message: string) { notices.push(message); } } }) });
   const plugin = new module.exports.default();
   await plugin.onload();
   const pasteClipboard = vi.spyOn(plugin, "pasteClipboard");
   return { plugin, commands, notices, state, readText, clipboard, error, transaction, editor, view, getFileCache, cachedRead, save, saveData, addSettingTab, pasteClipboard,
+    settingTab: addSettingTab.mock.calls[0][0], renderedSettings,
     run: async () => { await commands.find((command) => command.id === "paste")!.callback!(); },
     edit: (source = state.source) => { state.source = source; listeners.get("editor-change")!(editor, { file }); },
     index: (source = state.source, cache = structuredClone(initialCache)) => listeners.get("changed")!(file, source, cache),
@@ -138,6 +173,50 @@ describe("experimental settings and entry points", () => {
     app.saveData.mockRejectedValue(new Error("disk"));
     await app.plugin.updateSettings({ placement: "end" });
     expect(app.notices).toEqual(["Could not save settings"]);
+  });
+
+  it("declarative controls update commands and persist values across reload", async () => {
+    const app = await harness({});
+    await app.settingTab.setControlValue("enablePaste", true);
+    await app.settingTab.setControlValue("enablePaste", true);
+    expect(app.commands.filter((command) => command.id === "paste")).toHaveLength(1);
+    await app.settingTab.setControlValue("placement", "end");
+    await app.settingTab.setControlValue("insertionSide", "before");
+    const reloaded = await harness(app.saveData.mock.calls.at(-1)![0]);
+    expect(reloaded.plugin.settings).toEqual({ enablePaste: true, placement: "end", insertionSide: "before" });
+    await app.settingTab.setControlValue("enablePaste", false);
+    expect(app.commands.map((command) => command.id)).toEqual(["copy"]);
+  });
+
+  it("declarative settings reject unknown keys and normalize invalid values", async () => {
+    const app = await harness();
+    await app.settingTab.setControlValue("__proto__", { enablePaste: false });
+    await app.settingTab.setControlValue("unrecognized", true);
+    expect(app.saveData).not.toHaveBeenCalled();
+    await app.settingTab.setControlValue("enablePaste", "true");
+    await app.settingTab.setControlValue("placement", null);
+    await app.settingTab.setControlValue("insertionSide", "invalid");
+    expect(app.plugin.settings).toEqual({ enablePaste: false, placement: "nearest", insertionSide: "after" });
+    expect(app.commands.map((command) => command.id)).toEqual(["copy"]);
+  });
+
+  it("legacy settings render and persist changes without any 1.13 APIs", async () => {
+    const app = await harness({});
+    app.settingTab.display();
+    expect(app.renderedSettings.filter((row) => row.dropdown).every((row) => row.dropdown!.disabled)).toBe(true);
+    await app.renderedSettings.find((row) => row.toggle)!.toggle!.change(true);
+    expect(app.renderedSettings.find((row) => row.toggle)!.toggle!.value).toBe(true);
+    const dropdowns = app.renderedSettings.flatMap((row) => row.dropdown ? [row.dropdown] : []);
+    expect(dropdowns).toHaveLength(2);
+    expect(dropdowns.every((control) => !control.disabled)).toBe(true);
+    await dropdowns[0].change("next");
+    await dropdowns[1].change("before");
+    expect(app.plugin.settings).toEqual({ enablePaste: true, placement: "next", insertionSide: "before" });
+    await app.renderedSettings.find((row) => row.toggle)!.toggle!.change(false);
+    expect(app.renderedSettings.filter((row) => row.dropdown).every((row) => row.dropdown!.disabled)).toBe(true);
+    expect(app.commands.map((command) => command.id)).toEqual(["copy"]);
+    const reloaded = await harness(app.saveData.mock.calls.at(-1)![0]);
+    expect(reloaded.plugin.settings).toEqual({ enablePaste: false, placement: "next", insertionSide: "before" });
   });
 });
 
@@ -293,5 +372,17 @@ describe("metadata freshness without permanent fallback", () => {
     app.plugin.onunload(); await pending;
     expect(app.transaction).not.toHaveBeenCalled();
     expect(vi.getTimerCount()).toBe(0);
+  });
+
+  it("disabling Paste from declarative settings cancels an indexing wait", async () => {
+    vi.useFakeTimers();
+    const app = await harness(); app.edit();
+    const pending = app.run(); await vi.advanceTimersByTimeAsync(0);
+    await app.settingTab.setControlValue("enablePaste", false);
+    await pending;
+    expect(app.transaction).not.toHaveBeenCalled();
+    expect(app.state.source).toBe(initialSource);
+    expect(vi.getTimerCount()).toBe(0);
+    expect(app.commands.map((command) => command.id)).toEqual(["copy"]);
   });
 });
