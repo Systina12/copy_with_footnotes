@@ -71,6 +71,10 @@ export function buildClipboardText({ source, selectionStart, selectionEnd, cache
     visited.add(id);
     const definition = definitions.get(id);
     if (!definition || ambiguous.has(id)) continue;
+    // A partial definition in the selection cannot be safely completed by
+    // appending another copy of its marker after the selected text.
+    if (definition.start < end && definition.end > start &&
+        (definition.start < start || definition.end > end)) return selection;
     if (definition.start < start || definition.end > end) {
       appended.push(source.slice(definition.start, definition.end));
     }

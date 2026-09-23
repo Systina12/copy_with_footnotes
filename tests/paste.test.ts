@@ -73,6 +73,18 @@ describe("clipboard parsing and rewriting", () => {
     expect(plan.result).toContain("[^smith-2]: Smith et  al., 2024.");
   });
 
+  it("resolves a conflict with many adjacent references without ambiguous text matching", () => {
+    const incoming = parseClipboardFootnotes(`Text[^a]\n\n[^a]: ${"[^b]".repeat(18)}\n[^b]: Child`);
+    const target = parseClipboardFootnotes(`[^a]: ${"x".repeat(36)}`).definitions[0];
+    const destination = collectDestinationFootnotes("", {});
+    destination.definitions.push({ ...target, standalone: true });
+    destination.reservedIds.add("a");
+    const resolved = resolveFootnoteConflicts(incoming, destination);
+    expect(resolved.mapping.get("a")).toBe("a-2");
+    expect(resolved.mapping.get("b")).toBe("b");
+    expect(resolved.reused.size).toBe(0);
+  });
+
   it("appends unreferenced definitions after first-reference traversal", () => {
     const incoming = parseClipboardFootnotes("A[^a]\n\n[^z]: Orphan\n[^a]: See [^b]\n[^b]: B");
     const resolution = resolveFootnoteConflicts(incoming, collectDestinationFootnotes("", {}));

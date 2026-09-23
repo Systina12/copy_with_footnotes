@@ -102,11 +102,14 @@ export function collectDestinationFootnotes(source: string, cache: FootnoteMetad
     }
   }
   // Detect incomplete/stale caches without using regex matches as definition ranges.
+  // Both the matches and the covered ranges are ordered, so a large note with
+  // many definitions does not scan every cached definition for every marker.
+  const covered = [...definitions, ...literals, ...opaque.ranges].sort((a, b) => a.start - b.start);
+  let rangeIndex = 0;
   for (const match of source.matchAll(/^ {0,3}\[\^([^\s[\]\\]+)\]:/gm)) {
     const position = match.index;
-    if (definitions.some((definition) => position >= definition.start && position < definition.end) ||
-        literals.some((span) => position >= span.start && position < span.end) ||
-        opaque.ranges.some((span) => position >= span.start && position < span.end)) continue;
+    while (rangeIndex < covered.length && covered[rangeIndex].end <= position) rangeIndex++;
+    if (rangeIndex < covered.length && covered[rangeIndex].start <= position) continue;
     throw new FootnoteError("Destination footnote information is incomplete");
   }
   return { definitions, blocks, reservedIds, protectedRanges };
