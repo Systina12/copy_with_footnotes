@@ -65,6 +65,38 @@ export function resolveFootnoteConflicts(incoming: ClipboardFootnotes, destinati
     if (!parts) { parts = segmentsOf(definition); segments.set(definition, parts); }
     return parts;
   };
+  const unresolved = ordered.filter((definition) => !mapping.has(definition.id));
+  const searchNumeric = unresolved.some((definition) => numeric(definition.id));
+  const namedIds = new Set(unresolved.filter((definition) => !numeric(definition.id)).map((definition) => definition.id));
+  const numericByText = new Map<string, string[]>();
+  const namedSuffixes = new Map<string, string[]>();
+  const targetKeys = new Map<string, string | null>();
+  const targetKey = (id: string): string | null => {
+    if (targetKeys.has(id)) return targetKeys.get(id)!;
+    const targets = existing.get(id)!;
+    const key = JSON.stringify(getSegments(targets[0]));
+    const result = targets.every((target) => JSON.stringify(getSegments(target)) === key) ? key : null;
+    targetKeys.set(id, result);
+    return result;
+  };
+  // Search only eligible ID families. Numeric IDs can map to any numeric ID,
+  // so also group them by the non-reference text they must share to be reused.
+  for (const id of existing.keys()) {
+    if (numeric(id)) {
+      if (!searchNumeric) continue;
+      const key = targetKey(id);
+      if (key === null) continue;
+      const candidates = numericByText.get(key) ?? [];
+      candidates.push(id);
+      numericByText.set(key, candidates);
+    } else if (namedIds.size) {
+      const suffix = /^(.*)-([1-9]\d*)$/.exec(id);
+      if (!suffix || suffix[2] === "1" || !namedIds.has(suffix[1])) continue;
+      const candidates = namedSuffixes.get(suffix[1]) ?? [];
+      candidates.push(id);
+      namedSuffixes.set(suffix[1], candidates);
+    }
+  }
   const bindings = (definition: Definition, target: ExistingDefinition): [string, string][] | null => {
     if (definition.references.length !== target.references.length) return null;
     const incomingParts = getSegments(definition);
@@ -96,8 +128,13 @@ export function resolveFootnoteConflicts(incoming: ClipboardFootnotes, destinati
   };
   for (const definition of ordered) {
     if (mapping.has(definition.id)) continue;
-    const candidates = [...new Set([definition.id, ...existing.keys()])].filter((id) => allowedTarget(definition.id, id));
-    for (const candidate of candidates) {
+    // Check the original ID first, even if its content cannot match; this
+    // preserves its priority over previously renamed definitions.
+    const key = JSON.stringify(getSegments(definition));
+    const candidates = numeric(definition.id) ? numericByText.get(key) ?? [] :
+      (namedSuffixes.get(definition.id) ?? []).filter((id) => targetKey(id) === key);
+    const prioritized = [definition.id, ...candidates.filter((id) => id !== definition.id)];
+    for (const candidate of prioritized) {
       const proposal = tryReuse(definition.id, candidate);
       if (!proposal) continue;
       for (const [id, name] of proposal) { mapping.set(id, name); reused.add(id); }

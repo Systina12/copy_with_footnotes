@@ -2,7 +2,7 @@ import { fromMarkdown } from "mdast-util-from-markdown";
 import { gfmFootnoteFromMarkdown } from "mdast-util-gfm-footnote";
 import { gfmFootnote } from "micromark-extension-gfm-footnote";
 import type { Nodes } from "mdast";
-import { blockIsOpen, opaqueMarkdownRanges } from "./markdown-context";
+import { blockIsOpen, opaqueMarkdownRanges, SpanIndex } from "./markdown-context";
 
 export interface Span { start: number; end: number }
 export interface TextEdit extends Span { text: string }
@@ -72,6 +72,7 @@ export function parseClipboardFootnotes(source: string): ClipboardFootnotes {
     } else if ("children" in node) for (const child of node.children) nodes.push(child);
   }
   const opaque = opaqueMarkdownRanges(source, literalRanges);
+  const opaqueIndex = new SpanIndex(opaque.ranges);
   while (stack.length) {
     const item = stack.pop()!;
     const { node, parent } = item;
@@ -79,7 +80,7 @@ export function parseClipboardFootnotes(source: string): ClipboardFootnotes {
     if (node.type === "footnoteDefinition" || node.type === "footnoteReference") {
       const start = node.position?.start.offset ?? -1;
       const end = node.position?.end.offset ?? -1;
-      if (!validSpan(source, { start, end }) || opaque.ranges.some((span) => start >= span.start && start < span.end)) {
+      if (!validSpan(source, { start, end }) || opaqueIndex.containing(start)) {
         throw new FootnoteError("Footnotes inside unsupported Markdown syntax");
       }
       const raw = source.slice(start, end);

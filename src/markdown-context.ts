@@ -2,6 +2,31 @@ import type { Span } from "./paste-markdown";
 import { fromMarkdown } from "mdast-util-from-markdown";
 import type { Nodes } from "mdast";
 
+// Index potentially overlapping parser spans once. Syntax scanners can then
+// locate the literal containing an offset without repeatedly walking every span.
+export class SpanIndex {
+  private readonly ranges: Span[] = [];
+
+  constructor(spans: readonly Span[]) {
+    for (const span of [...spans].sort((a, b) => a.start - b.start)) {
+      const previous = this.ranges.at(-1);
+      if (previous && span.start <= previous.end) previous.end = Math.max(previous.end, span.end);
+      else this.ranges.push({ start: span.start, end: span.end });
+    }
+  }
+
+  containing(offset: number): Span | undefined {
+    let low = 0, high = this.ranges.length;
+    while (low < high) {
+      const middle = (low + high) >>> 1;
+      if (this.ranges[middle].start <= offset) low = middle + 1;
+      else high = middle;
+    }
+    const range = this.ranges[low - 1];
+    return range && offset < range.end ? range : undefined;
+  }
+}
+
 // Parse only the metadata section containing a paste endpoint. This guards
 // inline syntax; destination footnotes still come exclusively from Obsidian.
 export function inlineSyntaxRanges(source: string, span: Span): Span[] {
@@ -45,6 +70,7 @@ export function inlineCodeRanges(source: string, span: Span): Span[] {
 
 export function opaqueMarkdownRanges(source: string, literalRanges: readonly Span[]) {
   const ranges: (Span & { openEnd?: boolean })[] = [];
+  const literals = new SpanIndex(literalRanges);
   let unclosed = false;
   const frontmatter = /^---\r?\n[\s\S]*?\r?\n(?:---|\.\.\.)(?=\r?\n|$)/.exec(source);
   if (frontmatter) ranges.push({ start: 0, end: frontmatter[0].length });
@@ -54,13 +80,13 @@ export function opaqueMarkdownRanges(source: string, literalRanges: readonly Spa
   while ((match = tokens.exec(source))) {
     const start = match.index;
     if (escaped(source, start)) continue;
-    const literal = literalRanges.find((span) => start >= span.start && start < span.end);
+    const literal = literals.containing(start);
     if (literal) { tokens.lastIndex = literal.end; continue; }
     let end = -1;
     if (match[0] === "^[") {
       let depth = 1;
       for (let i = tokens.lastIndex; i < source.length; i++) {
-        const literal = literalRanges.find((span) => i >= span.start && i < span.end);
+        const literal = literals.containing(i);
         if (literal) { i = literal.end - 1; continue; }
         if (escaped(source, i)) continue;
         if (source[i] === "[") depth++;

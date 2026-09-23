@@ -85,6 +85,19 @@ describe("clipboard parsing and rewriting", () => {
     expect(resolved.reused.size).toBe(0);
   });
 
+  it("finds a reusable dependency pair among many unrelated destination definitions", () => {
+    const incoming = parseClipboardFootnotes("Text[^a]\n\n[^a]: Shared [^b]\n[^b]: Child");
+    const unrelated = Array.from({ length: 150 }, (_, index) => `[^other${index}]: Different ${index}`).join("\n");
+    const target = parseClipboardFootnotes(`${unrelated}\n[^a]: Shared [^wrong]\n[^wrong]: Wrong\n` +
+      "[^b]: Different\n[^a-2]: Shared [^b-2]\n[^b-2]: Child");
+    const destination = collectDestinationFootnotes("", {});
+    destination.definitions.push(...target.definitions.map((definition) => ({ ...definition, standalone: true })));
+    for (const definition of target.definitions) destination.reservedIds.add(definition.id);
+    const resolved = resolveFootnoteConflicts(incoming, destination);
+    expect(resolved.mapping).toEqual(new Map([["a", "a-2"], ["b", "b-2"]]));
+    expect(resolved.reused).toEqual(new Set(["a", "b"]));
+  });
+
   it("appends unreferenced definitions after first-reference traversal", () => {
     const incoming = parseClipboardFootnotes("A[^a]\n\n[^z]: Orphan\n[^a]: See [^b]\n[^b]: B");
     const resolution = resolveFootnoteConflicts(incoming, collectDestinationFootnotes("", {}));

@@ -2,7 +2,7 @@ import { fromMarkdown } from "mdast-util-from-markdown";
 import { gfmFootnoteFromMarkdown } from "mdast-util-gfm-footnote";
 import { gfmFootnote } from "micromark-extension-gfm-footnote";
 import type { Nodes } from "mdast";
-import { blockIsOpen, opaqueMarkdownRanges } from "./markdown-context";
+import { blockIsOpen, opaqueMarkdownRanges, SpanIndex } from "./markdown-context";
 import { FootnoteError, validSpan, type Span, type TextEdit } from "./paste-markdown";
 import type { DestinationFootnotes, FootnoteMetadata } from "./paste-destination";
 
@@ -53,9 +53,10 @@ function syntax(source: string, ids: ReadonlySet<string>) {
     }
   }
   const opaque = opaqueMarkdownRanges(source, literals);
+  const opaqueIndex = new SpanIndex(opaque.ranges);
   open.push(...opaque.ranges.filter((range) => range.openEnd));
   return { definitions, open, references: references.filter((reference) =>
-    !opaque.ranges.some((range) => reference.start >= range.start && reference.start < range.end)) };
+    !opaqueIndex.containing(reference.start)) };
 }
 
 export function validatePasteContext(input: PasteContextInput): void {
