@@ -51,3 +51,5 @@ Use a supported LTS Node.js release. Run `npm ci`, `npm run lint`, `npm test`, a
 Copy with Footnotes in Community plugins. No CSS file is needed.
 
 API findings and release checks: [Verification](docs/verification.md).
+
+Latest source review: [Code review, 2026-09-23](docs/review-2026-09-23.md).

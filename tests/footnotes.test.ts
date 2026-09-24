@@ -71,6 +71,18 @@ describe("stale cache and offsets", () => {
     expect(copy(basic.source, null)).toBe(basic.selection);
   });
 
+  it("does not duplicate a definition partially included in the selection", () => {
+    const end = basic.source.indexOf("Source") + 3;
+    const selection = basic.source.slice(0, end);
+    expect(buildClipboardText({ source: basic.source, selectionStart: 0, selectionEnd: end,
+      cache: basicCache })).toBe(selection);
+    const cyclic = cases.find((item) => item.name === "self cycle")!;
+    const cyclicCache = captured.fixtures.find((item) => item.name === "self cycle")!;
+    const start = cyclic.source.indexOf("[^a]:") + 2;
+    expect(buildClipboardText({ source: cyclic.source, selectionStart: start,
+      selectionEnd: cyclic.source.length, cache: cyclicCache })).toBe(cyclic.source.slice(start));
+  });
+
   it("does not mutate metadata", () => {
     const cache = structuredClone(basicCache);
     const before = structuredClone(cache);

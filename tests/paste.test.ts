@@ -73,6 +73,31 @@ describe("clipboard parsing and rewriting", () => {
     expect(plan.result).toContain("[^smith-2]: Smith et  al., 2024.");
   });
 
+  it("resolves a conflict with many adjacent references without ambiguous text matching", () => {
+    const incoming = parseClipboardFootnotes(`Text[^a]\n\n[^a]: ${"[^b]".repeat(18)}\n[^b]: Child`);
+    const target = parseClipboardFootnotes(`[^a]: ${"x".repeat(36)}`).definitions[0];
+    const destination = collectDestinationFootnotes("", {});
+    destination.definitions.push({ ...target, standalone: true });
+    destination.reservedIds.add("a");
+    const resolved = resolveFootnoteConflicts(incoming, destination);
+    expect(resolved.mapping.get("a")).toBe("a-2");
+    expect(resolved.mapping.get("b")).toBe("b");
+    expect(resolved.reused.size).toBe(0);
+  });
+
+  it("finds a reusable dependency pair among many unrelated destination definitions", () => {
+    const incoming = parseClipboardFootnotes("Text[^a]\n\n[^a]: Shared [^b]\n[^b]: Child");
+    const unrelated = Array.from({ length: 150 }, (_, index) => `[^other${index}]: Different ${index}`).join("\n");
+    const target = parseClipboardFootnotes(`${unrelated}\n[^a]: Shared [^wrong]\n[^wrong]: Wrong\n` +
+      "[^b]: Different\n[^a-2]: Shared [^b-2]\n[^b-2]: Child");
+    const destination = collectDestinationFootnotes("", {});
+    destination.definitions.push(...target.definitions.map((definition) => ({ ...definition, standalone: true })));
+    for (const definition of target.definitions) destination.reservedIds.add(definition.id);
+    const resolved = resolveFootnoteConflicts(incoming, destination);
+    expect(resolved.mapping).toEqual(new Map([["a", "a-2"], ["b", "b-2"]]));
+    expect(resolved.reused).toEqual(new Set(["a", "b"]));
+  });
+
   it("appends unreferenced definitions after first-reference traversal", () => {
     const incoming = parseClipboardFootnotes("A[^a]\n\n[^z]: Orphan\n[^a]: See [^b]\n[^b]: B");
     const resolution = resolveFootnoteConflicts(incoming, collectDestinationFootnotes("", {}));

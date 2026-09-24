@@ -117,7 +117,7 @@
     "name": "partial definition",
     "source": "A[^x]\n\n[^x]: First\n    Second",
     "selection": "A[^x]\n\n[^x]: Fi",
-    "expected": "A[^x]\n\n[^x]: Fi\n\n[^x]: First\n    Second"
+    "expected": "A[^x]\n\n[^x]: Fi"
   },
   {
     "name": "included recursive parent",

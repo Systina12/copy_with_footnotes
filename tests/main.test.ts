@@ -36,13 +36,15 @@ function harness() {
   const file = new TFile();
   let source = cases[0].source;
   let end = cases[0].selection.length;
+  let selections = 1;
   let mode = "source";
   let active = true;
   const cache = structuredClone(captured.fixtures[0]);
   const getFileCache = vi.fn(() => cache);
   const view = {
     file, getMode: () => mode,
-    editor: { getValue: () => source, getCursor: (side: string) => ({ line: 0, ch: side === "from" ? 0 : end }),
+    editor: { getValue: () => source, listSelections: () => Array(selections).fill(null),
+      getCursor: (side: string) => ({ line: 0, ch: side === "from" ? 0 : end }),
       posToOffset: (pos: { ch: number }) => pos.ch },
   };
   class Plugin {
@@ -79,6 +81,7 @@ function harness() {
       return items;
     },
     setSelection: (value: number) => { end = value; },
+    setSelectionCount: (value: number) => { selections = value; },
     setMode: (value: string) => { mode = value; },
     deactivate: () => { active = false; },
     edit: (value: string) => { source = value; listeners.get("editor-change")!(view.editor, { file }); },
@@ -111,6 +114,14 @@ describe("command integration", () => {
     await app.run();
     expect(app.writeText).not.toHaveBeenCalled();
     expect(app.notices).toEqual(["No text selected"]);
+  });
+
+  it("does not silently copy only the primary range when multiple ranges are selected", async () => {
+    app.setSelectionCount(2);
+    await app.run();
+    expect(app.writeText).not.toHaveBeenCalled();
+    expect(app.notices).toEqual(["Select a single text range to copy"]);
+    expect(app.openMenu()).toHaveLength(0);
   });
 
   it.each(["reading", "no editor"])("safely handles %s", async (state) => {
@@ -183,7 +194,7 @@ describe("editor context menu", () => {
   it("uses the event's editor and file even when no Markdown view is active", async () => {
     app.deactivate();
     const source = cases[0].source.replace("Alpha", "Other");
-    const editor = { getValue: () => source,
+    const editor = { getValue: () => source, listSelections: () => [null],
       getCursor: (side: string) => ({ line: 0, ch: side === "from" ? 0 : cases[0].selection.length }),
       posToOffset: (pos: { ch: number }) => pos.ch };
     const file = {};

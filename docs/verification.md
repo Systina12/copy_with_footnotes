@@ -1,11 +1,19 @@
 # Verification
 
-This document covers Copy with Footnotes 0.2.1, including optional experimental
+This document covers Copy with Footnotes 0.2.2, including optional experimental
 Paste. Versions 0.1.0 and 0.1.1 contain Copy only.
 
 ## Results
 
-Latest validation ran on 2026-09-09 for the scanner follow-up release, 0.2.1.
+The earlier native validation ran on 2026-09-09 for version 0.2.1.
+
+The 0.2.2 review on 2026-09-23 passed 535 automated tests, lint, type checking,
+production build, and GitHub Actions CI. It also fixed partial-definition and
+multiple-selection Copy behavior and streamlined Paste conflict matching and
+Markdown scanning. The official metadata workers and the installed Obsidian
+application were not rerun for this release; the stored 1.8.7 and 1.13.7
+metadata fixtures passed in the automated suite. See the
+[0.2.2 review](review-2026-09-23.md) for details.
 
 | Check | Result |
 | --- | --- |

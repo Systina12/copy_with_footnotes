@@ -35,7 +35,7 @@ export default class CopyWithFootnotesPlugin extends Plugin {
     this.registerEvent(this.app.workspace.on("editor-menu", (menu, editor, info) => {
       const { selectionStart, selectionEnd } = getSelectionOffsets(editor);
       if (!info.file) return;
-      if (selectionStart !== selectionEnd) {
+      if (editor.listSelections().length === 1 && selectionStart !== selectionEnd) {
         menu.addItem((item) => item
           .setTitle("Copy with footnotes")
           .setIcon("copy")
@@ -112,14 +112,16 @@ export default class CopyWithFootnotesPlugin extends Plugin {
       const cache = indexed && metadataForSource(indexed.cache, indexed.source, source);
       return cache ? { source, cache } : null;
     };
-    if (current()) return current();
+    const matched = current();
+    if (matched) return matched;
     // Existing caches predate plugin activation. Check the saved buffer and
     // marker ranges; subsequent changed events provide an exact source/cache pair.
     if (!this.editedFiles.has(file) && !this.indexedNotes.has(file)) {
       try {
         const saved = await this.app.vault.cachedRead(file);
         if (!isCurrent()) return null;
-        if (current()) return current();
+        const indexed = current();
+        if (indexed) return indexed;
         const cache = this.app.metadataCache.getFileCache(file);
         const aligned = cache && metadataForSource(cache, saved, source);
         if (aligned && !this.editedFiles.has(file)) return { source, cache: aligned };
@@ -131,7 +133,8 @@ export default class CopyWithFootnotesPlugin extends Plugin {
     try { await view.save(); }
     catch { throw new FootnoteError("Could not refresh this note's footnotes"); }
     if (!isCurrent()) return null;
-    if (current()) return current();
+    const refreshed = current();
+    if (refreshed) return refreshed;
     return new Promise((resolve) => {
       const finish = (value: IndexedNote | null) => {
         window.clearTimeout(timer);
@@ -216,6 +219,10 @@ export default class CopyWithFootnotesPlugin extends Plugin {
 
   private async copySelection(editor: Editor, info: MarkdownFileInfo): Promise<void> {
     if (this.stopped) return;
+    if (editor.listSelections().length !== 1) {
+      new Notice("Select a single text range to copy");
+      return;
+    }
     const file = info.file;
     if (!file) {
       new Notice("No active Markdown editor");
